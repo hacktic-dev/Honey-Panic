@@ -1,8 +1,11 @@
 --!Type(Client)
 
 COLLECTION_DISTANCE = 1
+MAGNET_DISTANCE = 5
+MAGNET_STRENGTH = 1
 
 ClientObjectSpawner = require("ClientObjectSpawner")
+UpgradesManager = require("UpgradesManager")
 
 --!SerializeField
 local objectType : string = ""
@@ -13,5 +16,13 @@ function self:Update()
     selfPosition = self:GetComponent(Transform).position
     if Vector3.Distance(characterPosition, selfPosition) < COLLECTION_DISTANCE then
         ClientObjectSpawner.CollectObject(self:GetComponent(Transform).gameObject, objectType)
+    end
+
+    if UpgradesManager.IsClientMagnetActive() then
+        local distance = Vector3.Distance(characterPosition, selfPosition)
+        if distance < MAGNET_DISTANCE then
+            local direction = (characterPosition - selfPosition).normalized
+            self:GetComponent(Transform).position = self:GetComponent(Transform).position + direction * MAGNET_STRENGTH * (MAGNET_DISTANCE - distance) * Time.deltaTime
+        end
     end
 end

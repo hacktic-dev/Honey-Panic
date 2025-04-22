@@ -8,12 +8,15 @@ local BeeCollectionUiObject : GameObject = nil
 local HoneyPanicUiObject : GameObject = nil
 --!SerializeField
 local RoundOverUiObject : GameObject = nil
+--!SerializeField
+local UpgradesDisplayUiObject : GameObject = nil
 
 local uiMap = {
     TokenDisplay = TokenDisplayObject,
     BeeCollectionUi = BeeCollectionUiObject,
     HoneyPanicUi = HoneyPanicUiObject,
     RoundOverUi = RoundOverUiObject,
+    UpgradesDisplayUi = UpgradesDisplayUiObject,
 }
 
 -- Activate the object if it is not active
@@ -84,13 +87,18 @@ end
 
 function ShowBeeCollectionMode()
     ToggleUI("BeeCollectionUi", true)
+    ToggleUI("UpgradesDisplayUi", true)
     ToggleUI("HoneyPanicUi", false)
     ToggleUI("RoundOverUi", false)
+
+    UpgradesDisplayUiObject:GetComponent(UpgradesDisplayUi).ShowMagnet()
 end
 
 function ShowHoneyPanicMode()
     ToggleUI("BeeCollectionUi", false)
     ToggleUI("HoneyPanicUi", true)
+
+    UpgradesDisplayUiObject:GetComponent(UpgradesDisplayUi).HideMagnet()
 end
 
 function ShowRoundOverUi(honeyCollected, tokensEarned)

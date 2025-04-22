@@ -795,6 +795,61 @@ Transform:
   - {fileID: 580750834}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &903080587
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 903080589}
+  - component: {fileID: 903080588}
+  m_Layer: 0
+  m_Name: UpgradesDisplayUi
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &903080588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 903080587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75e43777ac790d31c1f4676d27f85d06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _networkId: 0
+  _script: {fileID: -974389366465450183, guid: cf3b37a216a60de47b2b67b89d275dd3, type: 3}
+  _properties: []
+  _uiOutput: 3
+  _uiOutputSettings:
+    rid: -2
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+--- !u!4 &903080589
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 903080587}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1319005008}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1254550816
 GameObject:
   m_ObjectHideFlags: 0
@@ -1076,6 +1131,7 @@ MonoBehaviour:
   m_BeeCollectionUiObject: {fileID: 760605411}
   m_HoneyPanicUiObject: {fileID: 714191863}
   m_RoundOverUiObject: {fileID: 53442970}
+  m_UpgradesDisplayUiObject: {fileID: 903080587}
   references:
     version: 2
     RefIds:
@@ -1098,6 +1154,7 @@ Transform:
   - {fileID: 760605413}
   - {fileID: 714191865}
   - {fileID: 53442972}
+  - {fileID: 903080589}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1332807716
@@ -1348,6 +1405,7 @@ GameObject:
   - component: {fileID: 1676481753}
   - component: {fileID: 1676481756}
   - component: {fileID: 1676481755}
+  - component: {fileID: 1676481757}
   m_Layer: 0
   m_Name: GameModules
   m_TagString: Untagged
@@ -1440,6 +1498,29 @@ MonoBehaviour:
     type: 3}
   m_HoneyPrefab: {fileID: 4899184866370185844, guid: 6414698de5b84e242829c71549bbfe72,
     type: 3}
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+--- !u!114 &1676481757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676481752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fe38673360f33c18237217a37298495, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _networkId: 0
+  _script: {fileID: -974389366465450183, guid: f53c86a68cd0331438e821af8df68440, type: 3}
+  _properties: []
+  _uiOutput: 0
+  _uiOutputSettings:
+    rid: -2
   references:
     version: 2
     RefIds:

@@ -1,0 +1,17 @@
+.upgrades-display-ui {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.hidden
+{
+    display: none;
+}
+
+.magnet-container
+{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
