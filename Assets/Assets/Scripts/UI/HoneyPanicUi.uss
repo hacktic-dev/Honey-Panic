@@ -1,2 +1,10 @@
 .honey-panic-ui {
 }
+
+.honey-panic-label
+{
+    font-size: 20px;
+    color: white;
+    align-self: center;
+    text-shadow: 4px 4px 9.5px rgba(0,0,0,0.5);
+}

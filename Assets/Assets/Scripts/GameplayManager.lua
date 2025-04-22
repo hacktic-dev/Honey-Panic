@@ -2,6 +2,7 @@
 
 UIManager = require("UIManager")
 ClientObjectSpawner = require("ClientObjectSpawner")
+PlayerTracker = require("PlayerTracker")
 
 local GameStateTypes = { 
     BeeCollection = 0,
@@ -12,9 +13,9 @@ local BeeCount : number = 0
 local GameState = GameStateTypes.BeeCollection
 
 BEE_THRESHOLD = 1000 -- Threshold for bee collection
-HONEY_PANIC_MAX_TIME = 60 -- Maximum time for honey panic in seconds
+HONEY_PANIC_MAX_TIME = 10 -- Maximum time for honey panic in seconds
 
-local honeyPanicTime = nil
+honeyPanicTime = nil
  
 RequestBeeCollectedEvent = Event.new("RequestBeeCollectedEvent") -- Event to request a bee collection
 NotifyBeeCountChangedEvent = Event.new("NotifyBeeCountChangedEvent") -- Event to notify bee count changes
@@ -25,11 +26,14 @@ NotifyBeeCollectionStartedEvent = Event.new("NotifyBeeCollectionStartedEvent") -
 RequestCurrentGameStateEvent = Event.new("RequestCurrentGameStateEvent") -- Event to request the current game state
 NotifyCurrentGameStateEvent = Event.new("NotifyCurrentGameStateEvent") -- Event to notify the current game state
 
+NotifyHoneyPanicCountdownValue = Event.new("NotifyHoneyPanicCountdownValue") -- Event to notify the honey panic countdown value
+
 function self:ServerAwake()
     InitBeeCollection()
 
-    RequestBeeCollectedEvent:Connect(function(player, value)
+    RequestBeeCollectedEvent:Connect(function(player, value, tokenValue)
         if GameState == GameStateTypes.BeeCollection then
+            PlayerTracker.GivePlayerTokens(player, tokenValue)
             BeeCount = BeeCount + value 
             if BeeCount >= BEE_THRESHOLD then 
                 EnterHoneyPanic()
@@ -44,6 +48,16 @@ function self:ServerAwake()
     end)
 
     honeyPanicTime = IntValue.new("honeyPanicTime", 0) 
+
+    Timer.new(1, function()
+        if GameState == GameStateTypes.HoneyPanic then
+            honeyPanicTime.value = honeyPanicTime.value - 1
+
+            if honeyPanicTime.value <= 0 then
+                InitBeeCollection()
+            end
+        end
+    end, true)
 
 end
 
@@ -61,30 +75,41 @@ function EnterHoneyPanic()
     NotifyHoneyPanicStartedEvent:FireAllClients()
 end
 
+function SetBeeCollectionModeClient()
+    UIManager.ShowBeeCollectionMode()
+    ClientObjectSpawner.SetBeeCollectionMode()
+end
+
+function SetHoneyPanicModeClient()
+    UIManager.ShowHoneyPanicMode()
+    ClientObjectSpawner.SetHoneyPanicMode()
+end
+
 function self:ClientAwake()
     honeyPanicTime = IntValue.new("honeyPanicTime", 0)
-
-    Timer.new(1, function()
-        if GameState == GameStateTypes.HoneyPanic then
-            honeyPanicTime.value = honeyPanicTime.value - 1
-            if honeyPanicTime.value <= 0 then
-                InitBeeCollection()
-            end
-        end
-    end, true)
 
     NotifyCurrentGameStateEvent:Connect(function(gameState)
         UIManager.ShowTokenDisplay()
         print(tostring(gameState))
         if gameState == GameStateTypes.BeeCollection then
             print("GameplayManager: NotifyCurrentGameStateEvent: Player: " .. client.localPlayer.name .. " received game state: BeeCollection")
-            UIManager.ShowBeeCollectionMode()
-            ClientObjectSpawner.SetBeeCollectionMode()
+            SetBeeCollectionModeClient()
         elseif gameState == GameStateTypes.HoneyPanic then
             print("GameplayManager: NotifyCurrentGameStateEvent: Player: " .. client.localPlayer.name .. " received game state: HoneyPanic")
-            UIManager.ShowHoneyPanicMode()
-            ClientObjectSpawner.SetHoneyPanicMode()
+            SetHoneyPanicModeClient()
         end
     end)
+
+    NotifyHoneyPanicStartedEvent:Connect(function()
+        SetHoneyPanicModeClient()
+    end)
+
+    NotifyBeeCollectionStartedEvent:Connect(function()
+        SetBeeCollectionModeClient()
+    end)
+
+    Timer.new(0.1, function()
+        RequestBeeCollectedEvent:FireServer(10, 10) -- Request a bee collection from the server
+    end, true)
 end
 

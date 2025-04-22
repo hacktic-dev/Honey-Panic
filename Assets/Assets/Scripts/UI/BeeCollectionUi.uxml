@@ -8,6 +8,7 @@
 >
 
   <hr:UILuaView class="bee-collection-ui">
+  <hr:UILabel class="bee-collection-label" name="_beeCollectionLabel"/>
   </hr:UILuaView>
 
 </UXML>

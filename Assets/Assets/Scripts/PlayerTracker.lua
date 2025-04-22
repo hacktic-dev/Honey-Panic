@@ -93,10 +93,4 @@ function self:ServerAwake()
     end
 
     TrackPlayers(server, InitTokens)
-
-    Timer.new(1, function()
-        for _, playerInfo in pairs(players) do
-            GivePlayerTokens(playerInfo.player, 1)
-        end
-    end, true)
 end
