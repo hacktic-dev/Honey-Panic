@@ -25,6 +25,9 @@ namespace Highrise.Lua.Generated
         private const string s_scriptGUID = "a3e13235dce9da24688a60beb0645b0f";
         public override string ScriptGUID => s_scriptGUID;
 
+        [SerializeField] public System.Collections.Generic.List<UnityEngine.BoxCollider> m_SpawnZones = default;
+        [SerializeField] public UnityEngine.GameObject m_BeePrefab = default;
+        [SerializeField] public UnityEngine.GameObject m_HoneyPrefab = default;
 
         protected override SerializedPropertyValue[] SerializeProperties()
         {
@@ -33,6 +36,9 @@ namespace Highrise.Lua.Generated
 
             return new SerializedPropertyValue[]
             {
+                CreateSerializedProperty(_script.GetPropertyAt(0), m_SpawnZones),
+                CreateSerializedProperty(_script.GetPropertyAt(1), m_BeePrefab),
+                CreateSerializedProperty(_script.GetPropertyAt(2), m_HoneyPrefab),
             };
         }
     }
