@@ -58,8 +58,9 @@ function self:ServerAwake()
             honeyPanicTime.value = honeyPanicTime.value - 1
 
             if honeyPanicTime.value <= 0 then
-                NotifyRoundOverEvent:FireAllClients(HoneyCollected, HoneyToTokens(HoneyCollected)) -- Notify all players that the round is over
+                PlayerTracker.GiveAllPlayersTokens(HoneyToTokens(HoneyCollected)) -- Give all players tokens based on the honey collected
                 EnterBeeCollection()
+                NotifyRoundOverEvent:FireAllClients(HoneyCollected, HoneyToTokens(HoneyCollected)) -- Notify all players that the round is over
             end
         end
     end, true)
@@ -92,7 +93,6 @@ function EnterHoneyPanic()
 end
 
 function SetBeeCollectionModeClient()
-    UIManager.ShowBeeCollectionMode()
     ClientObjectSpawner.SetBeeCollectionMode()
 end
 
@@ -110,6 +110,7 @@ function self:ClientAwake()
         if gameState == GameStateTypes.BeeCollection then
             print("GameplayManager: NotifyCurrentGameStateEvent: Player: " .. client.localPlayer.name .. " received game state: BeeCollection")
             SetBeeCollectionModeClient()
+            UIManager.ShowBeeCollectionMode()
         elseif gameState == GameStateTypes.HoneyPanic then
             print("GameplayManager: NotifyCurrentGameStateEvent: Player: " .. client.localPlayer.name .. " received game state: HoneyPanic")
             SetHoneyPanicModeClient()
@@ -125,11 +126,13 @@ function self:ClientAwake()
     end)
 
     NotifyRoundOverEvent:Connect(function(honeyCollected, tokenValue)
-        UIManager.ShowRoundOverScreen(honeyCollected, tokenValue) -- Show the round over screen with the collected honey and token value
+        UIManager.ShowRoundOverUi(honeyCollected, tokenValue) -- Show the round over screen with the collected honey and token value
     end)
 
+    --Debug timer to simulate bee collection and honey collection
     Timer.new(0.1, function()
         RequestBeeCollectedEvent:FireServer(10, 10) -- Request a bee collection from the server
+        RequestHoneyCollectedEvent:FireServer(1) -- Request honey collected from the server
     end, true)
 end
 

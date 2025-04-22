@@ -49,7 +49,6 @@ function self:ClientAwake()
 
         --The function to run everytime someones score changes
         playerinfo.score.Changed:Connect(function(newVal, oldVal)
-            print(player.name .. ": " .. tostring(newVal))
             NotifyScoreChangedEvent:Fire(newVal) -- Notify the client of the score change
         end)
 
@@ -74,6 +73,12 @@ function GivePlayerTokens(player, amount)
         end, false)
     else
         batchedInventoryTransactions[player]:GivePlayer(player, "tokens", amount)
+    end
+end
+
+function GiveAllPlayersTokens(amount)
+    for player, playerInfo in pairs(players) do
+        GivePlayerTokens(player, amount)
     end
 end
 

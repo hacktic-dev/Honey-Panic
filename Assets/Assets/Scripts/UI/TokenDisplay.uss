@@ -1,5 +1,5 @@
 .token-display {
-    width: 50px;
+    width: 100px;
     margin-left: 10px;
 }
 
@@ -13,4 +13,5 @@
 {
     color: rgb(255, 255, 255);
     align-self: center;
+    font-size: 30px;
 }

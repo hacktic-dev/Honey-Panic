@@ -95,6 +95,6 @@ end
 
 function ShowRoundOverUi(honeyCollected, tokensEarned)
     ToggleUI("RoundOverUi", true)
-    ToggleUI("HonryPanicUi", false)
-    --TODO: Init RoundOverUi with honeyCollected and tokensEarned
+    ToggleUI("HoneyPanicUi", false)
+    RoundOverUiObject:GetComponent(RoundOverUi).Init(honeyCollected, tokensEarned)
 end

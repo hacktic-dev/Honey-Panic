@@ -7,4 +7,5 @@
     color: white;
     align-self: center;
     text-shadow: 4px 4px 9.5px rgba(0,0,0,0.5);
+    font-size: 40px;
 }

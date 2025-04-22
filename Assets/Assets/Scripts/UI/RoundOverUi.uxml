@@ -8,6 +8,8 @@
 >
 
   <hr:UILuaView class="round-over-ui">
+  <VisualElement class="round-over-container" name="_roundOverContainer">
+  </VisualElement>
   </hr:UILuaView>
 
 </UXML>
