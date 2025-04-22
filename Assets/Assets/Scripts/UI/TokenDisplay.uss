@@ -1,0 +1,16 @@
+.token-display {
+    width: 50px;
+    margin-left: 10px;
+}
+
+.token-container
+{
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 8px;
+}
+
+.token-label
+{
+    color: rgb(255, 255, 255);
+    align-self: center;
+}
