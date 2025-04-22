@@ -18,13 +18,14 @@ using Highrise.Lua;
 
 namespace Highrise.Lua.Generated
 {
-    [AddComponentMenu("Lua/HoneyPanicUi")]
-    [LuaRegisterType(0xf20e090797d69555, typeof(LuaBehaviour))]
-    public class HoneyPanicUi : LuaBehaviourThunk
+    [AddComponentMenu("Lua/CollectibleObject")]
+    [LuaRegisterType(0x16342f19b0e5d63f, typeof(LuaBehaviour))]
+    public class CollectibleObject : LuaBehaviourThunk
     {
-        private const string s_scriptGUID = "6755f15804eba5f4bb57fdda301684bd";
+        private const string s_scriptGUID = "d61eee943193f614d8af489e32a869f9";
         public override string ScriptGUID => s_scriptGUID;
 
+        [SerializeField] public System.String m_objectType = "";
 
         protected override SerializedPropertyValue[] SerializeProperties()
         {
@@ -33,9 +34,7 @@ namespace Highrise.Lua.Generated
 
             return new SerializedPropertyValue[]
             {
-                CreateSerializedProperty(_script.GetPropertyAt(0), null),
-                CreateSerializedProperty(_script.GetPropertyAt(1), null),
-                CreateSerializedProperty(_script.GetPropertyAt(2), null),
+                CreateSerializedProperty(_script.GetPropertyAt(0), m_objectType),
             };
         }
     }

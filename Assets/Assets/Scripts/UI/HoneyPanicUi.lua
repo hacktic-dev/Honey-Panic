@@ -4,11 +4,14 @@
 local _honeyPanicLabel : UILabel = nil
 --!Bind
 local _honeyPanicCountdown : UILabel = nil
+--!Bind
+local _honeyPanicLabelSubtitle : UILabel = nil
 
 GameplayManager = require("GameplayManager")
 
 function self:ClientAwake()
     _honeyPanicLabel:SetPrelocalizedText("Honey Panic!")
+    _honeyPanicLabelSubtitle:SetPrelocalizedText("Collect as much honey as you can before time runs out!")
     _honeyPanicCountdown:SetPrelocalizedText("60")
 
     GameplayManager.honeyPanicTime.Changed:Connect(function(newVal)

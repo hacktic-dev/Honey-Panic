@@ -9,6 +9,7 @@
 
   <hr:UILuaView class="honey-panic-ui">
   <hr:UILabel class="honey-panic-label" name="_honeyPanicLabel"/>
+  <hr:UILabel class="honey-panic-label" name="_honeyPanicLabelSubtitle"/>
   <hr:UILabel class="honey-panic-label" name="_honeyPanicCountdown"/>
   </hr:UILuaView>
 

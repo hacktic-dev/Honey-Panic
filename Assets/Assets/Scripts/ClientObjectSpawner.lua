@@ -15,6 +15,9 @@ GameplayStateTypes =
 
 GameplayState = GameplayStateTypes.BeeCollection
 
+BeeCollectedEvent = Event.new("BeeCollectedEvent")
+HoneyCollectedEvent = Event.new("HoneyCollectedEvent")
+
 MAX_OBJECTS_COUNT = 100
 
 spawnedPrefabs = {}
@@ -54,13 +57,39 @@ function SpawnObject(prefab)
     table.insert(spawnedPrefabs, spawnedObject)
 end
 
+function CollectObject(object, type)
+    local index = nil
+    for i, spawnedObject in ipairs(spawnedPrefabs) do
+        if spawnedObject == object then
+            index = i
+            break
+        end
+    end
+
+    if index then
+        Object.Destroy(object)
+        table.remove(spawnedPrefabs, index)
+        if type == "Bee" then
+            BeeCollectedEvent:Fire()
+        elseif type == "Honey" then
+            HoneyCollectedEvent:Fire()
+        else
+            print("Error - Unknown object type: " .. type)
+        end
+    end
+end
+
 function self:ClientAwake()
     Timer.new(1, function()
         if GameplayState == GameplayStateTypes.BeeCollection then
             if #spawnedPrefabs < MAX_OBJECTS_COUNT then
                 SpawnObject(BeePrefab)
             end
-        elseif GameplayState == GameplayStateTypes.HoneyPanic then
+        end
+    end, true)
+
+    Timer.new(0.5, function()
+        if GameplayState == GameplayStateTypes.HoneyPanic then
             if #spawnedPrefabs < MAX_OBJECTS_COUNT then
                 SpawnObject(HoneyPrefab)
             end

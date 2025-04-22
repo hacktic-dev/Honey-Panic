@@ -69,7 +69,6 @@ function GivePlayerTokens(player, amount)
         Timer.new(3, function()
             Inventory.CommitTransaction(batchedInventoryTransactions[player])
             batchedInventoryTransactions[player] = nil
-            print("Committing batched inventory transaction for player: " .. player.name)
         end, false)
     else
         batchedInventoryTransactions[player]:GivePlayer(player, "tokens", amount)

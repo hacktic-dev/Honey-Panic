@@ -129,10 +129,12 @@ function self:ClientAwake()
         UIManager.ShowRoundOverUi(honeyCollected, tokenValue) -- Show the round over screen with the collected honey and token value
     end)
 
-    --Debug timer to simulate bee collection and honey collection
-    Timer.new(0.1, function()
-        RequestBeeCollectedEvent:FireServer(10, 10) -- Request a bee collection from the server
-        RequestHoneyCollectedEvent:FireServer(1) -- Request honey collected from the server
-    end, true)
+    ClientObjectSpawner.BeeCollectedEvent:Connect(function(object)
+        RequestBeeCollectedEvent:FireServer(10, 10)
+    end)
+
+    ClientObjectSpawner.HoneyCollectedEvent:Connect(function(object)
+        RequestHoneyCollectedEvent:FireServer(1)
+    end)
 end
 
