@@ -6,11 +6,14 @@ local TokenDisplayObject : GameObject = nil
 local BeeCollectionUiObject : GameObject = nil
 --!SerializeField
 local HoneyPanicUiObject : GameObject = nil
+--!SerializeField
+local RoundOverUiObject : GameObject = nil
 
 local uiMap = {
     TokenDisplay = TokenDisplayObject,
     BeeCollectionUi = BeeCollectionUiObject,
     HoneyPanicUi = HoneyPanicUiObject,
+    RoundOverUi = RoundOverUiObject,
 }
 
 -- Activate the object if it is not active
@@ -82,9 +85,16 @@ end
 function ShowBeeCollectionMode()
     ToggleUI("BeeCollectionUi", true)
     ToggleUI("HoneyPanicUi", false)
+    ToggleUI("RoundOverUi", false)
 end
 
 function ShowHoneyPanicMode()
     ToggleUI("BeeCollectionUi", false)
     ToggleUI("HoneyPanicUi", true)
+end
+
+function ShowRoundOverUi(honeyCollected, tokensEarned)
+    ToggleUI("RoundOverUi", true)
+    ToggleUI("HonryPanicUi", false)
+    --TODO: Init RoundOverUi with honeyCollected and tokensEarned
 end

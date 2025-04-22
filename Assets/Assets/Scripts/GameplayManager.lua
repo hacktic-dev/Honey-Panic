@@ -11,6 +11,7 @@ local GameStateTypes = {
 
 local BeeCount : number = 0
 local GameState = GameStateTypes.BeeCollection
+local HoneyCollected : number = 0
 
 BEE_THRESHOLD = 1000 -- Threshold for bee collection
 HONEY_PANIC_MAX_TIME = 10 -- Maximum time for honey panic in seconds
@@ -27,9 +28,12 @@ RequestCurrentGameStateEvent = Event.new("RequestCurrentGameStateEvent") -- Even
 NotifyCurrentGameStateEvent = Event.new("NotifyCurrentGameStateEvent") -- Event to notify the current game state
 
 NotifyHoneyPanicCountdownValue = Event.new("NotifyHoneyPanicCountdownValue") -- Event to notify the honey panic countdown value
+NotifyRoundOverEvent = Event.new("NotifyRoundOverEvent") -- Event to notify when the round is over
+
+RequestHoneyCollectedEvent = Event.new("RequestHoneyCollectedEvent") -- Event to request honey collected
 
 function self:ServerAwake()
-    InitBeeCollection()
+    EnterBeeCollection()
 
     RequestBeeCollectedEvent:Connect(function(player, value, tokenValue)
         if GameState == GameStateTypes.BeeCollection then
@@ -54,14 +58,25 @@ function self:ServerAwake()
             honeyPanicTime.value = honeyPanicTime.value - 1
 
             if honeyPanicTime.value <= 0 then
-                InitBeeCollection()
+                NotifyRoundOverEvent:FireAllClients(HoneyCollected, HoneyToTokens(HoneyCollected)) -- Notify all players that the round is over
+                EnterBeeCollection()
             end
         end
     end, true)
 
+    RequestHoneyCollectedEvent:Connect(function(player, value)
+        if GameState == GameStateTypes.HoneyPanic then
+            HoneyCollected = HoneyCollected + value
+        end
+    end)
+
 end
 
-function InitBeeCollection()
+function HoneyToTokens(honeyCollected)
+    return  honeyCollected --For now just do 1:1 conversion
+end
+
+function EnterBeeCollection()
     GameState = GameStateTypes.BeeCollection
     BeeCount = 0
     NotifyBeeCollectionStartedEvent:FireAllClients()
@@ -71,6 +86,7 @@ end
 function EnterHoneyPanic()
     GameState = GameStateTypes.HoneyPanic
     honeyPanicTime.value = HONEY_PANIC_MAX_TIME
+    HoneyCollected = 0
     -- Notify all players about the game state change
     NotifyHoneyPanicStartedEvent:FireAllClients()
 end
@@ -106,6 +122,10 @@ function self:ClientAwake()
 
     NotifyBeeCollectionStartedEvent:Connect(function()
         SetBeeCollectionModeClient()
+    end)
+
+    NotifyRoundOverEvent:Connect(function(honeyCollected, tokenValue)
+        UIManager.ShowRoundOverScreen(honeyCollected, tokenValue) -- Show the round over screen with the collected honey and token value
     end)
 
     Timer.new(0.1, function()
