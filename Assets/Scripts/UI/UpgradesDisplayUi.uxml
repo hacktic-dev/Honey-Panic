@@ -10,9 +10,11 @@
   <hr:UILuaView class="upgrades-display-ui" picking-mode="Ignore">
   <VisualElement class="magnet-container" name="_magnetContainer">
     <hr:UIButton class="magnet-button" name="_magnetButton">
-      <hr:UILabel class="magnet-label" name="_magnetLabel"/>
+      <hr:UILabel class="purchase-label" name="_magnetLabel"/>
       </hr:UIButton>
+          <VisualElement class="magnet-disabled-icon" name="_magnetDisabledIcon" />
       <hr:UILabel class="magnet-label" name="_magnetCountdown"/>
+      <VisualElement class="magnet-active-icon" name="_magnetActiveIcon" />
     </VisualElement>
     <VisualElement class="multiplier-container" name="_multiplierContainer">
       <hr:UILabel class="multiplier-label" name="_multiplierLabel"/>

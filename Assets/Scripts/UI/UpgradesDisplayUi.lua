@@ -16,19 +16,39 @@ local _multiplierLabel : UILabel = nil
 local _multiplierPurchaseLabel : UILabel = nil
 --!Bind
 local _multiplierPurchaseButton : UIButton = nil
+--!Bind
+local _magnetActiveIcon : VisualElement = nil
+--!Bind
+local _magnetDisabledIcon : VisualElement = nil
 
 UpgradesManager = require("UpgradesManager")
+TweenModule = require("TweenModule")
+Tween = TweenModule.Tween
+Easing = TweenModule.Easing
+
+RotateMagnetTween = Tween:new(
+    -25, -- Start rotation angle
+    5, -- End rotation angle
+    0.6, -- Duration in seconds
+    true, -- Loop flag
+    true, -- Yoyo flag
+    Easing.linear, -- Linear easing for smooth rotation
+    function(value, t)
+        _magnetActiveIcon.style.rotate = StyleRotate.new(Rotate.new(Angle.new(value)))
+    end
+)
 
 function ShowMagnet()
-    _magnetContainer:RemoveFromClassList("hidden")
+    --_magnetContainer:RemoveFromClassList("hidden")
 end
 
 function HideMagnet()
-    _magnetContainer:AddToClassList("hidden")
+   -- _magnetContainer:AddToClassList("hidden")
 end
 
 function self:ClientAwake()
 
+    _magnetActiveIcon:AddToClassList("hidden")
     _magnetCountdown:AddToClassList("hidden")
     _magnetButton:RemoveFromClassList("hidden")
     _magnetLabel:SetPrelocalizedText("+")
@@ -45,8 +65,11 @@ function self:ClientAwake()
 
     UpgradesManager.NotifyMagnetActivated:Connect(function()
         _magnetButton:AddToClassList("hidden")
+        _magnetDisabledIcon:AddToClassList("hidden")
+        _magnetActiveIcon:RemoveFromClassList("hidden")
         _magnetCountdown:RemoveFromClassList("hidden")
         _magnetCountdown:SetPrelocalizedText(60)
+        RotateMagnetTween:start()
     end)
 
     UpgradesManager.NotifyMagnetCountdownUpdated:Connect(function(newVal)
@@ -59,6 +82,8 @@ function self:ClientAwake()
 
     UpgradesManager.NotifyMagnetDeactivated:Connect(function()
         _magnetButton:RemoveFromClassList("hidden")
+        _magnetDisabledIcon:RemoveFromClassList("hidden")
+        _magnetActiveIcon:AddToClassList("hidden")
         _magnetCountdown:AddToClassList("hidden")
     end)
 
