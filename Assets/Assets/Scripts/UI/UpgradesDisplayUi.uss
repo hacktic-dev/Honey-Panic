@@ -15,3 +15,18 @@
     right: 10px;
     top: 10px;
 }
+
+.multiplier-container
+{
+    flex-direction: row;
+    position: absolute;
+    top: 5%;
+    right: 35%;
+}
+
+.multiplier-label
+{
+    color: white;
+    text-shadow: 4px 4px 9.5px rgba(0,0,0,0.5);
+    font-size: 30px;
+}

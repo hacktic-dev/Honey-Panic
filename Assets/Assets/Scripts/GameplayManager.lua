@@ -3,6 +3,7 @@
 UIManager = require("UIManager")
 ClientObjectSpawner = require("ClientObjectSpawner")
 PlayerTracker = require("PlayerTracker")
+UpgradesManager = require("UpgradesManager")
 
 local GameStateTypes = { 
     BeeCollection = 0,
@@ -13,7 +14,7 @@ local BeeCount : number = 0
 local GameState = GameStateTypes.BeeCollection
 local HoneyCollected : number = 0
 
-BEE_THRESHOLD = 1000 -- Threshold for bee collection
+BEE_THRESHOLD = 300 -- Threshold for bee collection
 HONEY_PANIC_MAX_TIME = 10 -- Maximum time for honey panic in seconds
 
 honeyPanicTime = nil
@@ -31,6 +32,8 @@ NotifyHoneyPanicCountdownValue = Event.new("NotifyHoneyPanicCountdownValue") -- 
 NotifyRoundOverEvent = Event.new("NotifyRoundOverEvent") -- Event to notify when the round is over
 
 RequestHoneyCollectedEvent = Event.new("RequestHoneyCollectedEvent") -- Event to request honey collected
+
+BeeCollectionStartedEvent = Event.new("BeeCollectionStartedEvent") -- Event to notify when bee collection starts
 
 function self:ServerAwake()
     EnterBeeCollection()
@@ -59,8 +62,8 @@ function self:ServerAwake()
 
             if honeyPanicTime.value <= 0 then
                 PlayerTracker.GiveAllPlayersTokens(HoneyToTokens(HoneyCollected)) -- Give all players tokens based on the honey collected
-                EnterBeeCollection()
                 NotifyRoundOverEvent:FireAllClients(HoneyCollected, HoneyToTokens(HoneyCollected)) -- Notify all players that the round is over
+                EnterBeeCollection()
             end
         end
     end, true)
@@ -74,12 +77,13 @@ function self:ServerAwake()
 end
 
 function HoneyToTokens(honeyCollected)
-    return  honeyCollected --For now just do 1:1 conversion
+    return  math.floor(honeyCollected * UpgradesManager.GetMultiplier()) --For now just do 1:1 conversion
 end
 
 function EnterBeeCollection()
     GameState = GameStateTypes.BeeCollection
     BeeCount = 0
+    BeeCollectionStartedEvent:Fire()
     NotifyBeeCollectionStartedEvent:FireAllClients()
     NotifyBeeCountChangedEvent:FireAllClients(BeeCount)
 end
