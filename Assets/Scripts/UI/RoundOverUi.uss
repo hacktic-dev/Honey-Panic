@@ -1,26 +1,77 @@
+:root {
+    --color-background-bottom: rgb(193, 209, 228);
+    --color-continue-button: rgb(28, 235, 79);
+    --color-continue-button-bottom: rgb(19, 201, 58);
+    --color-font: rgb(61, 171, 214);
+    --color-font-white: rgb(223, 255, 254);
+    
+    --font-default: url("project://database/Assets/MuseoSansRounded1000 SDF.asset");
+}
+
 .round-over-ui {
+    width: 200%;
+    height: 200%;
+    background-color: rgba(0,0,0,0.5);
+    position: absolute;
+    top: -50%;
+    left: -50%;
 }
 
 .round-over-container
 {
-    background-color: rgba(0,0,0,0.5)
-    border-radius: 8px;
-    width: 50%;
+    background-image: url("project://database/Assets/Textures/background_gradient.png");
+    border-radius: 20px;
+    width: 20%;
+    top: 40%;
+
+    padding: 15px;
+
     align-self: center;
+        border-color: var(--color-background-bottom);
+    border-bottom-width: 4px;
+}
+
+.portrait .round-over-container
+{
+    width: 45%;
+}
+
+.title-label
+{
+    color: var(--color-font);
+    font-size: 60px;
+    align-self: center;
+    -unity-font-definition: var(--font-default);
+    margin-bottom: 10px;
 }
 
 .round-over-label
 {
-    color: white;
-        font-size: 40px;
-        align-self:center;
+    color: var(--color-font);
+    font-size: 30px;
+    margin: 10px;
+    align-self:center;
+    -unity-font-definition: var(--font-default);
+}
+
+.continue-label
+{
+    color: var(--color-font-white);
+    font-size: 30px;
+    align-self:center;
+    -unity-font-definition: var(--font-default);
 }
 
 .close-button
 {
-    width: 50%;
-    background-color: rgb(255, 0, 0);
+    width: 40%;
+    min-width: 100px;
+    background-color: var(--color-continue-button);
     height: 50px;
-    margin: 15px;
+    margin-top: 15px;
     align-self: center;
+            border-radius: 10px;
+
+    border-color:var(--color-continue-button-bottom);
+    border-bottom-width: 4px;
 }
