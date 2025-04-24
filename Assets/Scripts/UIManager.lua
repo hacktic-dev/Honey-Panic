@@ -10,6 +10,10 @@ local HoneyPanicUiObject : GameObject = nil
 local RoundOverUiObject : GameObject = nil
 --!SerializeField
 local UpgradesDisplayUiObject : GameObject = nil
+--!SerializeField
+local RewardsWheelObject : GameObject = nil
+
+GameplayManager = require("GameplayManager")
 
 local uiMap = {
     TokenDisplay = TokenDisplayObject,
@@ -17,6 +21,7 @@ local uiMap = {
     HoneyPanicUi = HoneyPanicUiObject,
     RoundOverUi = RoundOverUiObject,
     UpgradesDisplayUi = UpgradesDisplayUiObject,
+    RewardsWheel = RewardsWheelObject,
 }
 
 -- Activate the object if it is not active
@@ -86,6 +91,11 @@ function ShowTokenDisplay()
 end
 
 function ShowBeeCollectionMode()
+
+    if IsActive("RewardsWheel") then
+        return
+    end
+
     ToggleUI("BeeCollectionUi", true)
     ToggleUI("UpgradesDisplayUi", true)
     ToggleUI("HoneyPanicUi", false)
@@ -95,6 +105,11 @@ function ShowBeeCollectionMode()
 end
 
 function ShowHoneyPanicMode()
+
+    if IsActive("RewardsWheel") then
+        return
+    end
+
     ToggleUI("BeeCollectionUi", false)
     ToggleUI("HoneyPanicUi", true)
 
@@ -102,7 +117,31 @@ function ShowHoneyPanicMode()
 end
 
 function ShowRoundOverUi(honeyCollected, tokensEarned)
+
+    if IsActive("RewardsWheel") then
+        return
+    end
+
     ToggleUI("RoundOverUi", true)
     ToggleUI("HoneyPanicUi", false)
     RoundOverUiObject:GetComponent(RoundOverUi).Init(honeyCollected, tokensEarned)
+end
+
+function ShowRewardsWheel()
+    ToggleUI("RewardsWheel", true)
+    ToggleUI("BeeCollectionUi", false)
+    ToggleUI("HoneyPanicUi", false)
+    ToggleUI("UpgradesDisplayUi", false)
+    RewardsWheelObject:GetComponent(RewardsWheel).Init()
+end
+
+function HideRewardsWheel()
+    ToggleUI("RewardsWheel", false)
+    ToggleUI("UpgradesDisplayUi", true)
+    
+    if GameplayManager.GetClientGameState() == GameplayManager.GameStateTypes.BeeCollection then
+        ToggleUI("BeeCollectionUi", true)
+    elseif GameplayManager.GetClientGameState() == GameplayManager.GameStateTypes.HoneyPanic then
+        ToggleUI("HoneyPanicUi", true)
+    end
 end

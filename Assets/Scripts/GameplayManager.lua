@@ -5,13 +5,14 @@ ClientObjectSpawner = require("ClientObjectSpawner")
 PlayerTracker = require("PlayerTracker")
 UpgradesManager = require("UpgradesManager")
 
-local GameStateTypes = { 
+GameStateTypes = { 
     BeeCollection = 0,
     HoneyPanic = 1,
 }
 
 local BeeCount : number = 0
 local GameState = GameStateTypes.BeeCollection
+local clientGameState = nil
 local HoneyCollected : number = 0
 
 BEE_THRESHOLD = 300 -- Threshold for bee collection
@@ -105,10 +106,15 @@ function SetHoneyPanicModeClient()
     ClientObjectSpawner.SetHoneyPanicMode()
 end
 
+function GetClientGameState()
+    return clientGameState
+end
+
 function self:ClientAwake()
     honeyPanicTime = IntValue.new("honeyPanicTime", 0)
 
     NotifyCurrentGameStateEvent:Connect(function(gameState)
+        clientGameState = gameState
         UIManager.ShowTokenDisplay()
         print(tostring(gameState))
         if gameState == GameStateTypes.BeeCollection then

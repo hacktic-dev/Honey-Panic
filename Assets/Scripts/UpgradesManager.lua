@@ -10,11 +10,15 @@ NotifyMagnetCountdownUpdated = Event.new("NotifyMagnetCountdownUpdated")
 RequestMagnetPurchaseEvent = Event.new("RequestMagnetPurchaseEvent")
 RequestMultiplierPurchaseEvent = Event.new("RequestMultiplierPurchaseEvent")
 
+RequestGivePlayerGoldEvent = Event.new("RequestGivePlayerGoldEvent")
+
 NotifyMultiplierChangedEvent = Event.new("NotifyMultiplierChangedEvent")
+NotifyGoldPoolChangedEvent = Event.new("NotifyGoldPoolChangedEvent")
 
 magnetCounts = {}
 
-multiplier = 1
+local multiplier = 1
+local goldPool = 0
 
 clientMultiplier = 1
 
@@ -39,6 +43,8 @@ function IncrementMultiplier()
 end
 
 function self:ServerAwake()
+    goldPool = IntValue.new("gold_spent", 0)
+
     RequestMagnetPurchaseEvent:Connect(function(player)
         ActivateMagnet(player)
     end)
@@ -65,6 +71,19 @@ function self:ServerAwake()
             NotifyMultiplierChangedEvent:FireAllClients(multiplier)
         end, false)
     end)
+
+    Timer.new(5, function()
+        Inventory.GetItem("GoldPool", "gold_spent", function(item)
+            if(item == nil) then
+                print("Item not found")
+                return
+            end
+
+            goldPool.value = item.amount
+            print("Gold Pool: " .. goldPool.value)
+
+        end)
+    end, true)
 end
 
 function IsClientMagnetActive()
@@ -75,7 +94,29 @@ function GetMultiplier()
     return multiplier
 end
 
+function GetGoldPool()
+    return goldPool.value
+end
+
+function GiveReward(rewardId)
+    if rewardId == "magnet" then
+        RequestMagnetPurchaseEvent:FireServer()
+    elseif rewardId == "multiplier" then
+        RequestMultiplierPurchaseEvent:FireServer()
+    elseif rewardId == "gold_1" then
+        RequestGivePlayerGoldEvent:FireServer(1)
+    elseif rewardId == "gold_5" then
+        RequestGivePlayerGoldEvent:FireServer(5)
+    elseif rewardId == "gold_25" then
+        RequestGivePlayerGoldEvent:FireServer(25)
+    else
+        print("ERROR - Invalid reward ID: " .. rewardId)
+    end
+end
+
 function self:ClientAwake()
+    goldPool = IntValue.new("gold_spent", 0)
+
     NotifyMagnetActivated:Connect(function()
         isClientMagnetActive = true
     end)

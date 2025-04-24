@@ -5,6 +5,7 @@ players = {} -- a table variable to store current players  and info
 batchedInventoryTransactions = {} -- a table variable to store batched inventory transactions
 
 NotifyScoreChangedEvent = Event.new("NotifyScoreChangedEvent") -- Event to notify score changes
+RequestGivePlayerTokensEvent = Event.new("RequestGivePlayerTokensEvent") -- Event to request player tokens
 
 GameplayManager = require("GameplayManager")
 UIManager = require("UIManager")
@@ -53,20 +54,41 @@ function self:ClientAwake()
     TrackPlayers(client)
 end
 
+function RequestGiveClientTokens(amount)
+    RequestGivePlayerTokensEvent:FireServer(amount)
+end
+
 function GivePlayerTokens(player, amount)
+    if client ~= nil then
+        print("Error: GivePlayerTokens should not be called on the client")
+        return
+    end
+
     local newScore = players[player].score.value + amount
     players[player].score.value = newScore
 
     -- Batch inventory transactions and commit them every 3 seconds
     if batchedInventoryTransactions[player] == nil then
-        batchedInventoryTransactions[player] = InventoryTransaction.new():GivePlayer(player, "tokens", amount)
+        if amount < 0 then
+            batchedInventoryTransactions[player] = InventoryTransaction.new():TakePlayer(player, "tokens", -amount)
+        else
+            batchedInventoryTransactions[player] = InventoryTransaction.new():GivePlayer(player, "tokens", amount)
+        end
         Timer.new(3, function()
             Inventory.CommitTransaction(batchedInventoryTransactions[player])
             batchedInventoryTransactions[player] = nil
         end, false)
     else
-        batchedInventoryTransactions[player]:GivePlayer(player, "tokens", amount)
+        if amount < 0 then
+            batchedInventoryTransactions[player]:TakePlayer(player, "tokens", -amount)
+        else
+            batchedInventoryTransactions[player]:GivePlayer(player, "tokens", amount)
+        end
     end
+end
+
+function GetPlayerTokens()
+    return players[client.localPlayer].score.value
 end
 
 function GiveAllPlayersTokens(amount)
@@ -91,4 +113,8 @@ function self:ServerAwake()
     end
 
     TrackPlayers(server, InitTokens)
+
+    RequestGivePlayerTokensEvent:Connect(function(player, amount)
+        GivePlayerTokens(player, amount)
+    end)
 end
