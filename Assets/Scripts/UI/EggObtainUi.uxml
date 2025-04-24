@@ -7,8 +7,8 @@
     xsi:noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd"
 >
 
-  <hr:UILuaView class="round-over-ui">
-  <VisualElement class="round-over-container" name="_roundOverContainer">
+  <hr:UILuaView class="egg-obtain-ui">
+  <VisualElement class="main-container" name="_mainContainer">
   </VisualElement>
   </hr:UILuaView>
 

@@ -1132,6 +1132,7 @@ MonoBehaviour:
   m_HoneyPanicUiObject: {fileID: 714191863}
   m_RoundOverUiObject: {fileID: 53442970}
   m_UpgradesDisplayUiObject: {fileID: 903080587}
+  m_RewardsWheelObject: {fileID: 1959692898}
   references:
     version: 2
     RefIds:
@@ -1150,6 +1151,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1959692899}
   - {fileID: 404581923}
   - {fileID: 760605413}
   - {fileID: 714191865}
@@ -1407,6 +1409,7 @@ GameObject:
   - component: {fileID: 1676481755}
   - component: {fileID: 1676481757}
   - component: {fileID: 1676481758}
+  - component: {fileID: 1676481759}
   m_Layer: 0
   m_Name: GameModules
   m_TagString: Untagged
@@ -1550,6 +1553,29 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
+--- !u!114 &1676481759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676481752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0387ce2e028cdc0112816ca54164772b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _networkId: 0
+  _script: {fileID: -974389366465450183, guid: b958cefbb853dcd4a85e6c70fbbb77fe, type: 3}
+  _properties: []
+  _uiOutput: 0
+  _uiOutputSettings:
+    rid: -2
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
 --- !u!1 &1922044618
 GameObject:
   m_ObjectHideFlags: 0
@@ -1562,6 +1588,8 @@ GameObject:
   - component: {fileID: 1922044621}
   - component: {fileID: 1922044620}
   - component: {fileID: 1922044619}
+  - component: {fileID: 1922044623}
+  - component: {fileID: 1922044624}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -1655,6 +1683,131 @@ Transform:
   m_Children: []
   m_Father: {fileID: 459604597}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1922044623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1922044618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 881728705, guid: 5e99434f214126023bd8db55a8296c39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _checkDistance: 1
+  _distance: 1
+  _moveTo: 1
+  _moveTarget: {fileID: 0}
+--- !u!114 &1922044624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1922044618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 317e1a82fec34db141d68c6a1a8e1f24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _networkId: 0
+  _script: {fileID: -974389366465450183, guid: 8ba11a57441c4d64fb098cbfa0511ff1, type: 3}
+  _properties: []
+  _uiOutput: 0
+  _uiOutputSettings:
+    rid: -2
+  m_role: rewards_wheel
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+--- !u!1 &1959692898
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1959692899}
+  - component: {fileID: 1959692900}
+  m_Layer: 0
+  m_Name: RewardsWheel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1959692899
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1959692898}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1319005008}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1959692900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1959692898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a98f3a59fa2d50b160bb92cc3343fd8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _networkId: 0
+  _script: {fileID: -974389366465450183, guid: 13503a8c40f25064da649219899cfd5b, type: 3}
+  _properties: []
+  _uiOutput: 3
+  _uiOutputSettings:
+    rid: -2
+  m_ItemIcons:
+  - {fileID: 2800000, guid: 649df14e71d9da7439946cc117c827cb, type: 3}
+  - {fileID: 2800000, guid: df45a458b02a6b14f9e0ecb5a6d6a7a6, type: 3}
+  - {fileID: 2800000, guid: f6640a41fb937a148beaf416a20d8c90, type: 3}
+  - {fileID: 2800000, guid: f6640a41fb937a148beaf416a20d8c90, type: 3}
+  - {fileID: 2800000, guid: f6640a41fb937a148beaf416a20d8c90, type: 3}
+  m_SpinEasing:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: -0.5660377
+      outSlope: -0.5660377
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.09375
+    - serializedVersion: 3
+      time: 1
+      value: 1.0011787
+      inSlope: -0.63808316
+      outSlope: -0.63808316
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.11458331
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
 --- !u!1 &1966078514
 GameObject:
   m_ObjectHideFlags: 0

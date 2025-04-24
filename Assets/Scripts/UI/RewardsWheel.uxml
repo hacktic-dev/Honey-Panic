@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UXML
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="UnityEngine.UIElements"
+    xmlns:hr="Highrise.UI"
+    xmlns:editor="UnityEditor.UIElements"
+    xsi:noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd"
+>
+
+  <hr:UILuaView class="daily-rewards-wheel">
+  <VisualElement class="main-container">
+  <VisualElement class="card-container" name ="_cardContainer">
+    <hr:UILabel class="title" name="_title" />
+  <VisualElement class="wheel-container">
+  <VisualElement class="wheel" name="_wheel">
+  </VisualElement>
+  </VisualElement>
+    <hr:UIButton class="spin-button" name="_spinButton">
+  <hr:UILabel class="title" name="_spinButtonLabel" />
+  </hr:UIButton>
+  <hr:UIButton class="close-button" name="_closeButton">
+    <hr:UILabel class="title" name="_closeButtonLabel" />
+  </hr:UIButton>
+  </VisualElement>
+  </VisualElement>
+  </hr:UILuaView>
+
+</UXML>
