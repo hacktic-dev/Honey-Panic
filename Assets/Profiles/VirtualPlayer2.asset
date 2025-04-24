@@ -9,10 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1891542535, guid: a1d32ecfae27fdc4a8347da428bbc54a, type: 3}
-  m_Name: VirtualPlayerProfileSettings
+  m_Script: {fileID: 1247912247, guid: a1d32ecfae27fdc4a8347da428bbc54a, type: 3}
+  m_Name: VirtualPlayer2
   m_EditorClassIdentifier: 
+  _name: VirtualPlayer2
+  _id: c9b9272ac11112e5cdd6a4db
+  _outfit: {fileID: 11400000, guid: f918a0e6f4208744c83b7c1e370e7d56, type: 2}
   _isSubscriber: 0
   _isAgeVerifiedAbove18: 0
-  _virtualPlayerProfiles:
-  - {fileID: 11400000, guid: 261eaa7e75a466048822f63cd7747de4, type: 2}
+  _petName: 
+  _petId: 17d6f38b32bc6b012df886c6
+  _petOutfit: {fileID: 0}

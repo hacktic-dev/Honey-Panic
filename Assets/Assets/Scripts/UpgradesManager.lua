@@ -1,6 +1,7 @@
 --!Type(Module)
 
 GameplayManager = require("GameplayManager")
+PaymentsHandler = require("PaymentsHandler")
 
 NotifyMagnetActivated = Event.new("NotifyMagnetActivated")
 NotifyMagnetDeactivated = Event.new("NotifyMagnetDeactivated")
@@ -20,11 +21,11 @@ clientMultiplier = 1
 isClientMagnetActive = false
 
 function TryPurchaseMagnet()
-    RequestMagnetPurchaseEvent:FireServer()
+    PaymentsHandler.PromptPurchase("magnet", function() RequestMagnetPurchaseEvent:FireServer() end)
 end
 
 function TryPurchaseMultiplier()
-    RequestMultiplierPurchaseEvent:FireServer()
+    PaymentsHandler.PromptPurchase("multiplier", function() RequestMultiplierPurchaseEvent:FireServer() end)
 end
 
 function ActivateMagnet(player)
