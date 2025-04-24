@@ -76,6 +76,7 @@ function self:ServerAwake()
         Inventory.GetItem("GoldPool", "gold_spent", function(item)
             if(item == nil) then
                 print("Item not found")
+                goldPool.value = 0
                 return
             end
 

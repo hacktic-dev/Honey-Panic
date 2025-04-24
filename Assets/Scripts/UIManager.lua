@@ -112,6 +112,7 @@ function ShowHoneyPanicMode()
 
     ToggleUI("BeeCollectionUi", false)
     ToggleUI("HoneyPanicUi", true)
+    HoneyPanicUiObject:GetComponent(HoneyPanicUi).Init()
 
     UpgradesDisplayUiObject:GetComponent(UpgradesDisplayUi).HideMagnet()
 end
@@ -140,8 +141,8 @@ function HideRewardsWheel()
     ToggleUI("UpgradesDisplayUi", true)
     
     if GameplayManager.GetClientGameState() == GameplayManager.GameStateTypes.BeeCollection then
-        ToggleUI("BeeCollectionUi", true)
+        ShowBeeCollectionMode()
     elseif GameplayManager.GetClientGameState() == GameplayManager.GameStateTypes.HoneyPanic then
-        ToggleUI("HoneyPanicUi", true)
+        ShowHoneyPanicMode()
     end
 end
