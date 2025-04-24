@@ -6,7 +6,7 @@ batchedInventoryTransactions = {} -- a table variable to store batched inventory
 
 NotifyScoreChangedEvent = Event.new("NotifyScoreChangedEvent") -- Event to notify score changes
 
-gameplayManager = require("GameplayManager")
+GameplayManager = require("GameplayManager")
 UIManager = require("UIManager")
 
 local function TrackPlayers(game, characterCallback, disconnectedCallback)
@@ -27,6 +27,14 @@ local function TrackPlayers(game, characterCallback, disconnectedCallback)
                 characterCallback(playerinfo)
             end
         end)
+
+        if client ~= nil and client.localPlayer == player then
+            players[player].score.Changed:Connect(function(newVal, oldVal)
+            NotifyScoreChangedEvent:Fire(newVal)
+          end)
+  
+          GameplayManager.RequestCurrentGameStateEvent:FireServer() -- Request the current game state from the server when the player joins
+      end
     end)
 
     game.PlayerDisconnected:Connect(function(player) -- Remove player from the current table if they disconnect
@@ -41,22 +49,8 @@ end
     Client
 ]]
 function self:ClientAwake()
-
-    -- Create OnCharacterInstantiate as the callback for the Tracking function, to acces the playerinfo on client for each player that joins
-    function OnCharacterInstantiate(playerinfo)
-        local player = playerinfo.player
-        local character = player.character
-
-        --The function to run everytime someones score changes
-        playerinfo.score.Changed:Connect(function(newVal, oldVal)
-            NotifyScoreChangedEvent:Fire(newVal) -- Notify the client of the score change
-        end)
-
-        gameplayManager.RequestCurrentGameStateEvent:FireServer() -- Request the current game state from the server when the player joins
-    end
-
     -- Track players on Client with a callback
-    TrackPlayers(client, OnCharacterInstantiate)
+    TrackPlayers(client)
 end
 
 function GivePlayerTokens(player, amount)
