@@ -31,10 +31,29 @@ function Init(honeyCollected, tokensEarned)
     end, false)
     _roundOverContainer:Add(honeyPanicCompleteLabel)
 
+    local honeyContainer = VisualElement.new()
+    honeyContainer:AddToClassList("horizontal-container")
+
     local honeyCollectedLabel = UILabel.new()
-    honeyCollectedLabel:SetPrelocalizedText("Honey Collected: " .. tostring(honeyCollected))
+    honeyCollectedLabel:SetPrelocalizedText("Honey Collected: ")
     honeyCollectedLabel:AddToClassList("round-over-label")
-    honeyCollectedLabel.style.scale = StyleScale.new(Scale.new(Vector2.new(0, 0))) -- Initial scale
+    honeyContainer:Add(honeyCollectedLabel)
+
+    local honeyAmountContainer = VisualElement.new()
+    honeyAmountContainer:AddToClassList("reward-container")
+
+    local honeyAmountLabel = UILabel.new()
+    honeyAmountLabel:SetPrelocalizedText(tostring(honeyCollected))
+    honeyAmountLabel:AddToClassList("round-over-label")
+    honeyAmountContainer:Add(honeyAmountLabel)
+
+    local honeyIcon = VisualElement.new()
+    honeyIcon:AddToClassList("honey-icon")
+    honeyAmountContainer:Add(honeyIcon)
+
+    honeyContainer:Add(honeyAmountContainer)
+
+    honeyContainer.style.scale = StyleScale.new(Scale.new(Vector2.new(0, 0))) -- Initial scale
     Timer.new(0.55, function()
         local labelTween = Tween:new(
             0.2, -- Start scale
@@ -44,17 +63,38 @@ function Init(honeyCollected, tokensEarned)
             false, -- Yoyo flag
             Easing.easeOutBack, -- Easing function
             function(value, t)
-                honeyCollectedLabel.style.scale = StyleScale.new(Scale.new(Vector2.new(value, value)))
+                honeyContainer.style.scale = StyleScale.new(Scale.new(Vector2.new(value, value)))
             end
         )
         labelTween:start() -- Start the tween
     end, false)
-    _roundOverContainer:Add(honeyCollectedLabel)
+    _roundOverContainer:Add(honeyContainer)
+
+    local horizontalContainer = VisualElement.new()
+    horizontalContainer:AddToClassList("horizontal-container")
 
     local tokensEarnedLabel = UILabel.new()
-    tokensEarnedLabel:SetPrelocalizedText("Tokens Earned: " .. tostring(tokensEarned))
+    tokensEarnedLabel:SetPrelocalizedText("Reward: ")
     tokensEarnedLabel:AddToClassList("round-over-label")
-    tokensEarnedLabel.style.scale = StyleScale.new(Scale.new(Vector2.new(0, 0))) -- Initial scale
+
+    horizontalContainer:Add(tokensEarnedLabel)
+
+    local rewardContainer = VisualElement.new()
+    rewardContainer:AddToClassList("reward-container")
+
+    local rewardLabel = UILabel.new()
+    rewardLabel:SetPrelocalizedText(tostring(tokensEarned))
+    rewardLabel:AddToClassList("round-over-label")
+
+    rewardContainer:Add(rewardLabel)
+
+    local rewardIcon = VisualElement.new()
+    rewardIcon:AddToClassList("token-icon")
+    rewardContainer:Add(rewardIcon)
+
+    horizontalContainer:Add(rewardContainer)
+
+    horizontalContainer.style.scale = StyleScale.new(Scale.new(Vector2.new(0, 0))) -- Initial scale
     Timer.new(0.7, function()
         local labelTween = Tween:new(
             0.2, -- Start scale
@@ -64,12 +104,12 @@ function Init(honeyCollected, tokensEarned)
             false, -- Yoyo flag
             Easing.easeOutBack, -- Easing function
             function(value, t)
-                tokensEarnedLabel.style.scale = StyleScale.new(Scale.new(Vector2.new(value, value)))
+                horizontalContainer.style.scale = StyleScale.new(Scale.new(Vector2.new(value, value)))
             end,
         false)
         labelTween:start() -- Start the tween
     end, false)
-    _roundOverContainer:Add(tokensEarnedLabel)
+    _roundOverContainer:Add(horizontalContainer)
 
     local continueButton = UIButton.new()
     local continueButtonLabel = UILabel.new()
