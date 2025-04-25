@@ -8,9 +8,15 @@
 >
 
   <hr:UILuaView class="honey-panic-ui">
+  <VisualElement class="all-container">
+  <VisualElement class="title-container" name="_titleContainer">
   <hr:UILabel class="honey-panic-label" name="_honeyPanicLabel"/>
-  <hr:UILabel class="honey-panic-label" name="_honeyPanicLabelSubtitle"/>
-  <hr:UILabel class="honey-panic-label" name="_honeyPanicCountdown"/>
+  </VisualElement>
+  <VisualElement class="countdown-container" name="_countdownContainer">
+  <hr:UILabel class="honey-panic-countdown" name="_honeyPanicCountdown"/>
+  <VisualElement class="countdown-icon" name="_countdownIcon"/>
+  </VisualElement>
+  </VisualElement>
   </hr:UILuaView>
 
 </UXML>

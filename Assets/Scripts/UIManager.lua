@@ -130,6 +130,7 @@ function ShowRoundOverUi(honeyCollected, tokensEarned)
     ToggleUI("RoundOverUi", true)
     ToggleUI("HoneyPanicUi", false)
     ToggleUI("TokenDisplay", false)
+    ToggleUI("UpgradesDisplayUi", false)
     RoundOverUiObject:GetComponent(RoundOverUi).Init(honeyCollected, tokensEarned)
 end
 

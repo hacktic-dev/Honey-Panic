@@ -70,7 +70,7 @@ bottom: 43%;
 
 .portrait .obtain-title
 {
-    font-size: 26px;
+    font-size: 45px;
 }
 
 .obtain-description
@@ -81,11 +81,19 @@ bottom: 43%;
     white-space: normal;
     -unity-text-align: middle-center;
 
+    width: 45%;
+
     color: var(--color-font-white);
     font-size: 35px;
     align-self: center;
     -unity-font-definition: var(--font-default);
     margin-bottom: 10px;
+}
+
+.portrait .obtain-description
+{
+    bottom: 29%;
+    font-size: 30px;
 }
 
 .title {
