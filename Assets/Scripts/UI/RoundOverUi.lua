@@ -4,12 +4,28 @@
 local _roundOverContainer : VisualElement = nil
 
 UIManager = require("UIManager")
+PlayerTracker = require("PlayerTracker")
 TweenModule = require("TweenModule")
 Tween = TweenModule.Tween
 Easing = TweenModule.Easing
 
 function Init(honeyCollected, tokensEarned)
     _roundOverContainer:Clear()
+
+    local tokenContainer = VisualElement.new()
+    tokenContainer:AddToClassList("token-container")
+
+    local tokenLabel = UILabel.new()
+    tokenLabel:AddToClassList("token-label")
+    tokenLabel.name = "_tokenLabel"
+    tokenLabel:SetPrelocalizedText(PlayerTracker.GetPlayerTokens())
+    tokenContainer:Add(tokenLabel)
+
+    local tokenIcon = VisualElement.new()
+    tokenIcon:AddToClassList("token-icon")
+    tokenContainer:Add(tokenIcon)
+
+    _roundOverContainer:Add(tokenContainer)
 
     local honeyPanicCompleteLabel = UILabel.new()
     honeyPanicCompleteLabel:SetPrelocalizedText("Round Over!")

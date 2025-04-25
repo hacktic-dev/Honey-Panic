@@ -108,3 +108,34 @@
     margin-bottom: auto;
     margin-right: 20px;
 }
+
+.token-container
+{
+    position: absolute;
+    left: 0px;
+    top: -70px;
+
+    height: 60px;
+    width: 180px;
+
+    background-image: url("project://database/Assets/Textures/background_gradient.png");
+    border-radius: 20px;
+    border-color: var(--color-background-bottom);
+    border-bottom-width: 4px;
+
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.token-label
+{
+    -unity-font-definition: var(--font-default);
+    font-size: 26px;
+    margin-right: 10px;
+    margin-left: 20px;
+    color: var(--color-font);
+    width: 40%;
+    height:50%;
+    align-self: center;
+    -unity-text-align: middle-right;
+}

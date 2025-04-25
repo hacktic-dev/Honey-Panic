@@ -103,6 +103,7 @@ function ShowBeeCollectionMode()
     ToggleUI("UpgradesDisplayUi", true)
     ToggleUI("HoneyPanicUi", false)
     ToggleUI("RoundOverUi", false)
+    ToggleUI("TokenDisplay", true)
 
     UpgradesDisplayUiObject:GetComponent(UpgradesDisplayUi).ShowMagnet()
 end
@@ -128,6 +129,7 @@ function ShowRoundOverUi(honeyCollected, tokensEarned)
 
     ToggleUI("RoundOverUi", true)
     ToggleUI("HoneyPanicUi", false)
+    ToggleUI("TokenDisplay", false)
     RoundOverUiObject:GetComponent(RoundOverUi).Init(honeyCollected, tokensEarned)
 end
 
