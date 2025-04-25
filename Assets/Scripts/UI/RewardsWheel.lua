@@ -7,6 +7,8 @@ local _spinButton : UIButton = nil
 --!Bind
 local _spinButtonLabel : UILabel = nil
 --!Bind
+local _spinButtonSubtitle : UILabel = nil
+--!Bind
 local _closeButton : UIButton = nil
 --!Bind
 local _closeButtonLabel : UILabel = nil
@@ -30,6 +32,8 @@ local targetValue = 0
 local currentDisplayValue = 0
 
 local SPIN_COST = 1000
+
+local isSpinning : bool = false
 
 --!SerializeField
 local ItemIcons : {Texture} = nil
@@ -56,6 +60,10 @@ weights =
 
 function self:ClientAwake()
     _spinButton:RegisterPressCallback(function()
+        if isSpinning then
+            return
+        end
+
         local function ChoosePrize()
             local adjustedWeights = {}
             local totalWeight = 0
@@ -99,7 +107,8 @@ function self:ClientAwake()
         Spin(prizeId)
     end)
 
-    _spinButtonLabel:SetPrelocalizedText("SPIN\nx"..tostring(SPIN_COST))
+    _spinButtonLabel:SetPrelocalizedText("SPIN!")
+    _spinButtonSubtitle:SetPrelocalizedText(tostring(SPIN_COST))
     _closeButton:RegisterPressCallback(function()
         UIManager.HideRewardsWheel()
     end)
@@ -193,18 +202,21 @@ function Spin(prizeId : number)
 
     AddItems(prizeId)
     SpinWheelAnimations(_wheel)
-    _spinButton.visible = false
+    _spinButton:AddToClassList("spin-button-greyed")
 
     UpgradesManager.GiveReward(_prizeId)
 
+    isSpinning = true
+
     Timer.new(1.25, function()
-        _spinButton.visible = true
+        _spinButton:RemoveFromClassList("spin-button-greyed")
+        isSpinning = false
     --    UIManager.OpenEggObtainUi(_prizeId)
     end, false)
 end
 
 function Init()
-    _spinButton.visible = true
+    _spinButton:RemoveFromClassList("spin-button-greyed")
     AddItems(math.random(1, #ItemIcons))
 
     score = PlayerTracker.GetPlayerTokens()
@@ -212,10 +224,14 @@ function Init()
     currentDisplayValue = score
     targetValue = score
 
+    _cardContainer.style.scale = StyleScale.new(Scale.new(Vector2.new(0, 0)))
+    _spinButton.style.scale = StyleScale.new(Scale.new(Vector2.new(0, 0)))
+    _closeButton.style.scale = StyleScale.new(Scale.new(Vector2.new(0, 0)))
+
     local ScaleTween = Tween:new(
-        .2, -- Start scale
+        0, -- Start scale
         1, -- End scale
-        0.25, -- Duration in seconds
+        0.3, -- Duration in seconds
         false, -- Loop flag
         false, -- Yoyo flag
         Easing.easeOutBack, -- Easing function
@@ -230,4 +246,52 @@ function Init()
     )
 
     ScaleTween:start()
+
+    -- Delayed tween for the spin button
+    Timer.After(0.35, function()
+        local SpinButtonTween = Tween:new(
+            0, -- Start scale
+            1, -- End scale
+            0.3, -- Duration in seconds
+            false, -- Loop flag
+            false, -- Yoyo flag
+            Easing.easeOutBack, -- Easing function
+            function(value, t)
+                -- Update spin button scale
+                _spinButton.style.scale = StyleScale.new(Scale.new(Vector2.new(value, value)))
+                local rotationValue = -30 + (30 * value) -- Interpolates between -30 and 0
+                _spinButton.style.rotate = StyleRotate.new(Rotate.new(Angle.new(rotationValue)))
+            end,
+            function()
+                -- Ensure final scale is set
+                _spinButton.style.scale = StyleScale.new(Scale.new(Vector2.new(1, 1)))
+                _spinButton.style.rotate = StyleRotate.new(Rotate.new(Angle.new(0)))
+            end
+        )
+        SpinButtonTween:start()
+    end)
+
+    -- Delayed tween for the close button
+    Timer.After(0.5, function()
+        local CloseButtonTween = Tween:new(
+            0, -- Start scale
+            1, -- End scale
+            0.3, -- Duration in seconds
+            false, -- Loop flag
+            false, -- Yoyo flag
+            Easing.easeOutBack, -- Easing function
+            function(value, t)
+                -- Update close button scale
+                _closeButton.style.scale = StyleScale.new(Scale.new(Vector2.new(value, value)))
+                local rotationValue = -30 + (30 * value) -- Interpolates between -30 and 0
+                _closeButton.style.rotate = StyleRotate.new(Rotate.new(Angle.new(rotationValue)))
+            end,
+            function()
+                -- Ensure final scale is set
+                _closeButton.style.scale = StyleScale.new(Scale.new(Vector2.new(1, 1)))
+                _closeButton.style.rotate = StyleRotate.new(Rotate.new(Angle.new(0)))
+            end
+        )
+        CloseButtonTween:start()
+    end)
 end

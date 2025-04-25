@@ -19,12 +19,20 @@
   <VisualElement class="wheel" name="_wheel">
   </VisualElement>
   </VisualElement>
+  <VisualElement class="button-container">
     <hr:UIButton class="spin-button" name="_spinButton">
+    <VisualElement class="vertical-container">
   <hr:UILabel class="title" name="_spinButtonLabel" />
+  <VisualElement class="horizontal-container">
+  <hr:UILabel class="subtitle" name="_spinButtonSubtitle" />
+    <VisualElement class="token-icon" name="_spinTokenIcon"/>
+    </VisualElement>
+    </VisualElement>
   </hr:UIButton>
   <hr:UIButton class="close-button" name="_closeButton">
     <hr:UILabel class="title" name="_closeButtonLabel" />
   </hr:UIButton>
+  </VisualElement>
   </VisualElement>
   </VisualElement>
   </hr:UILuaView>

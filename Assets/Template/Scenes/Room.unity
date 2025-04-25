@@ -1776,9 +1776,9 @@ MonoBehaviour:
   m_ItemIcons:
   - {fileID: 2800000, guid: 649df14e71d9da7439946cc117c827cb, type: 3}
   - {fileID: 2800000, guid: df45a458b02a6b14f9e0ecb5a6d6a7a6, type: 3}
-  - {fileID: 2800000, guid: f6640a41fb937a148beaf416a20d8c90, type: 3}
-  - {fileID: 2800000, guid: f6640a41fb937a148beaf416a20d8c90, type: 3}
-  - {fileID: 2800000, guid: f6640a41fb937a148beaf416a20d8c90, type: 3}
+  - {fileID: 2800000, guid: 7c8745669453d28439482c2273dde171, type: 3}
+  - {fileID: 2800000, guid: ddc3da4ebfb391b46a84f61bd5cd090a, type: 3}
+  - {fileID: 2800000, guid: d3f050a9b04d55a4fba740415483842b, type: 3}
   m_SpinEasing:
     serializedVersion: 2
     m_Curve:
