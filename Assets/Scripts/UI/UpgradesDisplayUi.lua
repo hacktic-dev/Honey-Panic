@@ -90,5 +90,21 @@ function self:ClientAwake()
     UpgradesManager.NotifyMultiplierChangedEvent:Connect(function(newVal)
         local roundedVal = math.floor(newVal * 10 + 0.5) / 10
         _multiplierLabel:SetPrelocalizedText("x" .. tostring(roundedVal))
+
+        local labelTween = Tween:new(
+            0, -- Start scale
+            1, -- End scale
+            0.25, -- Duration in seconds
+            false, -- Loop flag
+            false, -- Yoyo flag
+            Easing.easeOutBack, -- Easing function
+            function(value, t)
+                _multiplierLabel.style.scale = StyleScale.new(Scale.new(Vector2.new(value, value)))
+                local rotationValue = -30 + (30 * value) -- Interpolates between -30 and 0
+                _multiplierLabel.style.rotate = StyleRotate.new(Rotate.new(Angle.new(rotationValue)))
+            end
+        )
+        labelTween:start() -- Start the tween
+
     end)
 end

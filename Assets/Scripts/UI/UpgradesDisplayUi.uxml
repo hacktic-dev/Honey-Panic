@@ -17,10 +17,10 @@
       <VisualElement class="magnet-active-icon" name="_magnetActiveIcon" />
     </VisualElement>
     <VisualElement class="multiplier-container" name="_multiplierContainer">
-      <hr:UILabel class="multiplier-label" name="_multiplierLabel"/>
-      <hr:UIButton class="multiplier-button" name="_multiplierPurchaseButton">
-        <hr:UILabel class="multiplier-label" name="_multiplierPurchaseLabel"/>
+    <hr:UIButton class="multiplier-button" name="_multiplierPurchaseButton">
+        <hr:UILabel class="purchase-label" name="_multiplierPurchaseLabel"/>
         </hr:UIButton>
+      <hr:UILabel class="multiplier-label" name="_multiplierLabel"/>
     </VisualElement>
   </hr:UILuaView>
 
