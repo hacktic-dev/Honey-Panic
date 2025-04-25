@@ -7,9 +7,10 @@
     xsi:noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd"
 >
 
-  <hr:UILuaView class="token-display">
+  <hr:UILuaView class="token-display" picking-mode="Ignore">
     <VisualElement class="token-container">
     <hr:UILabel class="token-label" name = "_tokenLabel"/>
+    <VisualElement class="token-icon" />
     </VisualElement>
   </hr:UILuaView>
 

@@ -75,13 +75,11 @@ function self:ServerAwake()
     Timer.new(5, function()
         Inventory.GetItem("GoldPool", "gold_spent", function(item)
             if(item == nil) then
-                print("Item not found")
                 goldPool.value = 0
                 return
             end
 
             goldPool.value = item.amount
-            print("Gold Pool: " .. goldPool.value)
 
         end)
     end, true)

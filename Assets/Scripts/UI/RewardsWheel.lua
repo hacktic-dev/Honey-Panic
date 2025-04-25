@@ -14,6 +14,8 @@ local _closeButtonLabel : UILabel = nil
 local _title : UILabel = nil
 --!Bind
 local _cardContainer : VisualElement = nil
+--!Bind
+local _tokenLabel : UILabel = nil
 
 local TweenModule = require("TweenModule")
 local Tween = TweenModule.Tween
@@ -23,6 +25,9 @@ local UpgradesManager = require("UpgradesManager")
 local PlayerTracker = require("PlayerTracker")
 
 local _prizeId = nil
+
+local targetValue = 0
+local currentDisplayValue = 0
 
 local SPIN_COST = 1000
 
@@ -100,6 +105,31 @@ function self:ClientAwake()
     end)
     _closeButtonLabel:SetPrelocalizedText("Close")
     _title:SetPrelocalizedText("Spin to win a prize!")
+
+    PlayerTracker.NotifyScoreChangedEvent:Connect(function(newVal)
+        print("Player score changed to " .. tostring(newVal))
+        targetValue = newVal
+        UpdateTokenLabel()
+    end)
+end
+
+function UpdateTokenLabel()
+    local function UpdateValue()
+        local speedMultiplier = 5 -- Adjust this value to control the speed multiplier
+        if currentDisplayValue ~= targetValue then
+            local step = math.max(1, math.floor(math.abs(targetValue - currentDisplayValue) / (10 / speedMultiplier)))
+            if currentDisplayValue < targetValue then
+                currentDisplayValue = math.min(currentDisplayValue + step, targetValue)
+            else
+                currentDisplayValue = math.max(currentDisplayValue - step, targetValue)
+            end
+            _tokenLabel:SetPrelocalizedText(tostring(currentDisplayValue))
+            if currentDisplayValue ~= targetValue then
+                Timer.After(0.05, UpdateValue)
+            end
+        end
+    end
+    UpdateValue()
 end
 
 function AddItems(prizeId : number)
@@ -176,6 +206,11 @@ end
 function Init()
     _spinButton.visible = true
     AddItems(math.random(1, #ItemIcons))
+
+    score = PlayerTracker.GetPlayerTokens()
+    _tokenLabel:SetPrelocalizedText(tostring(score))
+    currentDisplayValue = score
+    targetValue = score
 
     local ScaleTween = Tween:new(
         .2, -- Start scale

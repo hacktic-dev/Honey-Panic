@@ -19,7 +19,7 @@ using Highrise.Lua;
 namespace Highrise.Lua.Generated
 {
     [AddComponentMenu("Lua/CollectibleObject")]
-    [LuaRegisterType(0x16342f19b0e5d63f, typeof(LuaBehaviour))]
+    [LuaRegisterType(0x8a92e01e81b17f66, typeof(LuaBehaviour))]
     public class CollectibleObject : LuaBehaviourThunk
     {
         private const string s_scriptGUID = "d61eee943193f614d8af489e32a869f9";
