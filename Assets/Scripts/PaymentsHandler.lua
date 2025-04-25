@@ -25,7 +25,7 @@ function ServerHandlePurchase(purchase, player: Player)
             return
         end
 
-        transaction = InventoryTransaction.new():Give("GoldPool", "gold_spent", 2)
+        transaction = InventoryTransaction.new():Give("GoldPool", "gold_spent", 3)
         Inventory.CommitTransaction(transaction)
     end)
 end

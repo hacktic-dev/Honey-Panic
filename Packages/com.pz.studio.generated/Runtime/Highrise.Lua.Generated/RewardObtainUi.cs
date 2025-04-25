@@ -18,14 +18,14 @@ using Highrise.Lua;
 
 namespace Highrise.Lua.Generated
 {
-    [AddComponentMenu("Lua/EggObtainUi")]
-    [LuaRegisterType(0x2c5b4b666532f999, typeof(LuaBehaviour))]
-    public class EggObtainUi : LuaBehaviourThunk
+    [AddComponentMenu("Lua/RewardObtainUi")]
+    [LuaRegisterType(0xab58b27eb68ba2d, typeof(LuaBehaviour))]
+    public class RewardObtainUi : LuaBehaviourThunk
     {
-        private const string s_scriptGUID = "55c5ac050f1cc9d4daf013d4bd6f6f8d";
+        private const string s_scriptGUID = "6dc8f97f7432f8948b8c7ca88f78b051";
         public override string ScriptGUID => s_scriptGUID;
 
-        [SerializeField] public System.Collections.Generic.List<UnityEngine.Texture> m_EggIcons = default;
+        [SerializeField] public System.Collections.Generic.List<UnityEngine.Texture> m_RewardIcons = default;
 
         protected override SerializedPropertyValue[] SerializeProperties()
         {
@@ -34,7 +34,7 @@ namespace Highrise.Lua.Generated
 
             return new SerializedPropertyValue[]
             {
-                CreateSerializedProperty(_script.GetPropertyAt(0), m_EggIcons),
+                CreateSerializedProperty(_script.GetPropertyAt(0), m_RewardIcons),
                 CreateSerializedProperty(_script.GetPropertyAt(1), null),
             };
         }

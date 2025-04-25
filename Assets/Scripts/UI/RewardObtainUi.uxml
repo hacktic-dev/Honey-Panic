@@ -7,7 +7,7 @@
     xsi:noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd"
 >
 
-  <hr:UILuaView class="egg-obtain-ui">
+  <hr:UILuaView class="reward-obtain-ui">
   <VisualElement class="main-container" name="_mainContainer">
   </VisualElement>
   </hr:UILuaView>

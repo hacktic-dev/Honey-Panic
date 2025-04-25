@@ -1,7 +1,7 @@
 --!Type(UI)
 
 --!SerializeField
-local EggIcons : {Texture} = nil
+local RewardIcons : {Texture} = nil
 
 --!Bind
 local _mainContainer : VisualElement = nil
@@ -11,28 +11,23 @@ local Tween = TweenModule.Tween
 local Easing = TweenModule.Easing
 local UIManager = require("UIManager")
 
-eggImage = nil
+rewardImage = nil
 
 local idToTex = {
-    ["egg_red"] = EggIcons[1],
-    ["egg_orange"] = EggIcons[2],
-    ["egg_yellow"] = EggIcons[3],
-    ["egg_green"] = EggIcons[4],
-    ["egg_purple"] = EggIcons[5],
-    ["egg_pink"] = EggIcons[6],
-    ["egg_white"] = EggIcons[7],
-    ["egg_golden"] = EggIcons[8],
+    ["magnet"] = RewardIcons[1],
+    ["multiplier"] = RewardIcons[2],
+    ["gold_1"] = RewardIcons[3],
+    ["gold_5"] = RewardIcons[4],
+    ["gold_25"] = RewardIcons[5],
+
 }
 
-local eggIdToName = {
-    ["egg_red"] = "Red Egg",
-    ["egg_orange"] = "Orange Egg",
-    ["egg_yellow"] = "Yellow Egg",
-    ["egg_green"] = "Green Egg",
-    ["egg_purple"] = "Purple Egg",
-    ["egg_pink"] = "Pink Egg",
-    ["egg_white"] = "White Egg",
-    ["egg_golden"] = "Golden Egg",
+local rewardIdToName = {
+    ["magnet"] = { name = "an Item Magnet", description = "Pulls in bees and honey from afar for 60 seconds." },
+    ["multiplier"] = { name = "a Honey Multiplier", description = "Increases the honey multiplier in the next Honey Panic round." },
+    ["gold_1"] = { name = "1 Gold", description = "Spend it wisely!" },
+    ["gold_5"] = { name = "5 Gold", description = "Nice!" },
+    ["gold_25"] = { name = "25 Gold", description = "You're rich now!" },
 }
 
 local popInTween = Tween:new(
@@ -44,25 +39,26 @@ local popInTween = Tween:new(
     Easing.easeOutBack, -- Ease-out-back for a bouncy effect
     function(value, t)
         -- Update slot machine container scale
-        eggImage.style.scale = StyleScale.new(Scale.new(Vector2.new(value, value)))
+        rewardImage.style.scale = StyleScale.new(Scale.new(Vector2.new(value, value)))
     end,
     function()
         -- Ensure final scale is set
-        eggImage.style.scale = StyleScale.new(Scale.new(Vector2.new(1, 1)))
+        rewardImage.style.scale = StyleScale.new(Scale.new(Vector2.new(1, 1)))
     end
 )
 
-function Init(egg_id : string)
+function Init(reward_id : string)
+    print("Obtaining reward: " .. reward_id)
     _mainContainer:Clear()
 
     highlightImage = VisualElement.new()
     highlightImage:AddToClassList("highlight-image")
     _mainContainer:Add(highlightImage)
 
-    eggImage = Image.new()
-    eggImage:AddToClassList("egg-image")
-    eggImage.image = idToTex[egg_id]
-    _mainContainer:Add(eggImage)
+    rewardImage = Image.new()
+    rewardImage:AddToClassList("reward-image")
+    rewardImage.image = idToTex[reward_id]
+    _mainContainer:Add(rewardImage)
 
     highlightImage.style.opacity = 0 -- Set initial opacity to 0
 
@@ -104,7 +100,7 @@ function Init(egg_id : string)
 
     Timer.new(0.2, function()
         obtainLabel = UILabel.new()
-        obtainLabel:SetPrelocalizedText("You obtained a " .. eggIdToName[egg_id] .. "!")
+        obtainLabel:SetPrelocalizedText("You obtained " .. rewardIdToName[reward_id].name .. "!")
         obtainLabel:AddToClassList("obtain-title")
         _mainContainer:Add(obtainLabel)
         local fadeInTween = Tween:new(
@@ -126,17 +122,43 @@ function Init(egg_id : string)
 
     end, false)
 
-    Timer.new(1.5, function()
+    Timer.new(0.35, function()
+        descriptionLabel = UILabel.new()
+        descriptionLabel:SetPrelocalizedText(rewardIdToName[reward_id].description)
+        descriptionLabel:AddToClassList("obtain-description")
+        descriptionLabel.style.scale = StyleScale.new(Scale.new(Vector2.new(0, 0))) -- Set initial scale to 0
+        _mainContainer:Add(descriptionLabel)
+
+        -- Scale in the description
+        local descriptionScaleInTween = Tween:new(
+            0, -- Start scale
+            1, -- End scale
+            0.3, -- Duration in seconds
+            false, -- Loop flag
+            false, -- Yoyo flag
+            Easing.easeOutBack, -- Ease-out-back for smooth scaling
+            function(value, t)
+                descriptionLabel.style.scale = StyleScale.new(Scale.new(Vector2.new(value, value)))
+            end,
+            function()
+                -- Ensure final scale is set
+                descriptionLabel.style.scale = StyleScale.new(Scale.new(Vector2.new(1, 1)))
+            end
+        )
+        descriptionScaleInTween:start()
+    end, false)
+
+    Timer.new(1, function()
         -- Close the UI after the animation
         closeButton = UIButton.new()
         closeLabel = UILabel.new()
-        closeLabel:SetPrelocalizedText("Close")
+        closeLabel:SetPrelocalizedText("Continue")
         closeLabel:AddToClassList("title")
         closeButton:Add(closeLabel)
         closeButton:AddToClassList("close-button")
         closeButton.style.opacity = 0 -- Set initial opacity to 0
         closeButton:RegisterPressCallback(function()
-            UIManager.CloseEggObtainUi()
+            UIManager.HideRewardObtainUi()
         end, true, true, true)
         _mainContainer:Add(closeButton)
     

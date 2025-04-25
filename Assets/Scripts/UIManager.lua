@@ -12,6 +12,8 @@ local RoundOverUiObject : GameObject = nil
 local UpgradesDisplayUiObject : GameObject = nil
 --!SerializeField
 local RewardsWheelObject : GameObject = nil
+--!SerializeField
+local RewardObtainUiObject : GameObject = nil  
 
 GameplayManager = require("GameplayManager")
 
@@ -22,6 +24,7 @@ local uiMap = {
     RoundOverUi = RoundOverUiObject,
     UpgradesDisplayUi = UpgradesDisplayUiObject,
     RewardsWheel = RewardsWheelObject,
+    RewardObtainUi = RewardObtainUiObject,
 }
 
 -- Activate the object if it is not active
@@ -134,7 +137,7 @@ function ShowRewardsWheel()
     ToggleUI("HoneyPanicUi", false)
     ToggleUI("UpgradesDisplayUi", false)
     ToggleUI("TokenDisplay", false)
-    RewardsWheelObject:GetComponent(RewardsWheel).Init()
+    RewardsWheelObject:GetComponent(RewardsWheel).Init(true)
 end
 
 function HideRewardsWheel()
@@ -147,4 +150,17 @@ function HideRewardsWheel()
     elseif GameplayManager.GetClientGameState() == GameplayManager.GameStateTypes.HoneyPanic then
         ShowHoneyPanicMode()
     end
+end
+
+function ShowRewardObtainUi(reward_id : string)
+    ToggleUI("RewardObtainUi", true)
+    ToggleUI("RewardsWheel", false)
+
+    RewardObtainUiObject:GetComponent(RewardObtainUi).Init(reward_id)
+end
+
+function HideRewardObtainUi()
+    ToggleUI("RewardObtainUi", false)
+    ToggleUI("RewardsWheel", true)
+    RewardsWheelObject:GetComponent(RewardsWheel).Init(false)
 end

@@ -955,6 +955,67 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1254550816}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1273526111
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1273526112}
+  - component: {fileID: 1273526113}
+  m_Layer: 0
+  m_Name: RewardObtainUi
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1273526112
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273526111}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1319005008}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1273526113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273526111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d717f9aaceedf84131537c7d35a7b084, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _networkId: 0
+  _script: {fileID: -974389366465450183, guid: 6dc8f97f7432f8948b8c7ca88f78b051, type: 3}
+  _properties: []
+  _uiOutput: 3
+  _uiOutputSettings:
+    rid: -2
+  m_RewardIcons:
+  - {fileID: 2800000, guid: 649df14e71d9da7439946cc117c827cb, type: 3}
+  - {fileID: 2800000, guid: df45a458b02a6b14f9e0ecb5a6d6a7a6, type: 3}
+  - {fileID: 2800000, guid: b9b922378f102854bb8ef3994532ba26, type: 3}
+  - {fileID: 2800000, guid: 112448ba45065ff4fb3f0d952671b5aa, type: 3}
+  - {fileID: 2800000, guid: 9ac994b91b008274e87a6d6c72a6306c, type: 3}
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
 --- !u!1 &1273970306
 GameObject:
   m_ObjectHideFlags: 0
@@ -1133,6 +1194,7 @@ MonoBehaviour:
   m_RoundOverUiObject: {fileID: 53442970}
   m_UpgradesDisplayUiObject: {fileID: 903080587}
   m_RewardsWheelObject: {fileID: 1959692898}
+  m_RewardObtainUiObject: {fileID: 1273526111}
   references:
     version: 2
     RefIds:
@@ -1157,6 +1219,7 @@ Transform:
   - {fileID: 714191865}
   - {fileID: 53442972}
   - {fileID: 903080589}
+  - {fileID: 1273526112}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1332807716

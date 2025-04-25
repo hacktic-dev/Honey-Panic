@@ -51,11 +51,11 @@ prizes =
 
 weights =
 {
-    magnet = 40,
-    multiplier = 40,
-    gold_1 = 12.5,
-    gold_5 = 4.5,
-    gold_25 = 1.5,
+    magnet = 35,
+    multiplier = 35,
+    gold_1 = 20,
+    gold_5 = 7.5,
+    gold_25 = 2.5,
 }
 
 function self:ClientAwake()
@@ -148,7 +148,7 @@ function AddItems(prizeId : number)
         if i == 2 then
             -- Add the prize item at position 2
             local new_final_item = CreateItem(prizeId, _wheel)
-            Timer.After(1.25, function()
+            Timer.After(1.05, function()
                 -- Highlight the final item
                 new_final_item:AddToClassList("Slot__Item--Main")
             end)
@@ -208,14 +208,14 @@ function Spin(prizeId : number)
 
     isSpinning = true
 
-    Timer.new(1.25, function()
+    Timer.new(1.6, function()
         _spinButton:RemoveFromClassList("spin-button-greyed")
         isSpinning = false
-    --    UIManager.OpenEggObtainUi(_prizeId)
+        UIManager.ShowRewardObtainUi(_prizeId)
     end, false)
 end
 
-function Init()
+function Init(doTweens)
     _spinButton:RemoveFromClassList("spin-button-greyed")
     AddItems(math.random(1, #ItemIcons))
 
@@ -223,6 +223,10 @@ function Init()
     _tokenLabel:SetPrelocalizedText(tostring(score))
     currentDisplayValue = score
     targetValue = score
+
+    if not doTweens then
+        return
+    end
 
     _cardContainer.style.scale = StyleScale.new(Scale.new(Vector2.new(0, 0)))
     _spinButton.style.scale = StyleScale.new(Scale.new(Vector2.new(0, 0)))
