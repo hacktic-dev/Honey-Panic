@@ -32,6 +32,12 @@
     -unity-text-align: middle-center;
 }
 
+.portrait .magnet-label
+{
+    font-size: 25px;
+    margin-right: 5px;
+}
+
 .purchase-label
 {
     -unity-font-definition: var(--font-default);
@@ -43,6 +49,12 @@
     height:50%;
     align-self: center;
     -unity-text-align: middle-center;
+}
+
+.portrait .purchase-label
+{
+    font-size: 43px;
+    margin-left: 13px;
 }
 
 .magnet-container
@@ -66,7 +78,9 @@
 .portrait .magnet-container
 {
     left: 10px;
-    top: 100px;
+    top: 9%;
+    width: 30%;
+    height: 8%;
 }
 
 .multiplier-container
@@ -91,7 +105,9 @@
 .portrait .multiplier-container
 {
     left: 10px;
-    top: 190px;
+    top: 18%;
+    width: 30%;
+    height: 8%;
 }
 
 .multiplier-label
@@ -107,6 +123,11 @@
     -unity-text-align: middle-center;
 }
 
+.portrait .multiplier-label
+{
+    font-size: 30px;
+}
+
 .magnet-active-icon
 {
     background-image: url("project://database/Assets/Icons/magnet.png");
@@ -115,6 +136,12 @@
     margin-top: auto;
     margin-bottom: auto;
     margin-right: 20px;
+}
+
+.portrait .magnet-active-icon
+{
+    width: 32px;
+    height: 32px;
 }
 
 .magnet-disabled-icon
@@ -126,6 +153,13 @@
     margin-bottom: auto;
     margin-right: 20px;
 }
+
+.portrait .magnet-disabled-icon
+{
+    width: 32px;
+    height: 32px;
+}
+
 
 .magnet-button
 {

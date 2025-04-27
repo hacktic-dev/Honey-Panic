@@ -36,6 +36,12 @@
     justify-content: flex-end;
 }
 
+.portrait .token-container
+{
+    width: 35%;
+    height: 15%;
+}
+
 .token-label
 {
     -unity-font-definition: var(--font-default);
@@ -49,6 +55,11 @@
     -unity-text-align: middle-right;
 }
 
+.portrait .token-label
+{
+    font-size: 17px;
+}
+
 .token-icon
 {
     background-image: url("project://database/Assets/Icons/coin.png");
@@ -57,6 +68,12 @@
     margin-top: auto;
     margin-bottom: auto;
     margin-right: 20px;
+}
+
+.portrait .token-icon
+{
+    width: 30px;
+    height: 30px;
 }
 
 .daily-rewards-wheel {
@@ -139,6 +156,11 @@
     align-self: center;
     -unity-font-definition: var(--font-default);
     margin-bottom: 10px;
+}
+
+.portrait .title
+{
+    font-size: 35px;
 }
 
 .wheel-container

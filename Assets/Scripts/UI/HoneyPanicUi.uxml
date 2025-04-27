@@ -7,8 +7,8 @@
     xsi:noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd"
 >
 
-  <hr:UILuaView class="honey-panic-ui">
-  <VisualElement class="all-container">
+  <hr:UILuaView class="honey-panic-ui" picking-mode="Ignore">
+  <VisualElement class="all-container" picking-mode="Ignore">
   <VisualElement class="title-container" name="_titleContainer">
   <hr:UILabel class="honey-panic-label" name="_honeyPanicLabel"/>
   </VisualElement>
