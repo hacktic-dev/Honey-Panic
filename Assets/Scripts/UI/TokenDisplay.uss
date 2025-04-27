@@ -32,6 +32,13 @@
     justify-content: flex-end;
 }
 
+.portrait .token-container
+{
+    top: 0px;
+    width: 30%;
+    height: 8%;
+}
+
 .token-label
 {
     -unity-font-definition: var(--font-default);
@@ -47,7 +54,8 @@
 
 .portrait .token-label
 {
-    font-size: 30px;
+    font-size: 17px;
+    margin-left: 10px;
 }
 
 .token-icon
@@ -62,6 +70,7 @@
 
 .portrait .token-icon
 {
-        width: 60px;
-    height: 60px;
+        width: 30px;
+    height: 30px;
+    margin-right: 20px;
 }

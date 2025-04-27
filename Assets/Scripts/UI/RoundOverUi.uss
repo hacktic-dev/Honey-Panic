@@ -45,6 +45,11 @@
     margin-bottom: 10px;
 }
 
+.portrait .title-label
+{
+    font-size: 45px;
+}
+
 .round-over-label
 {
     color: var(--color-font);
@@ -54,12 +59,22 @@
     -unity-font-definition: var(--font-default);
 }
 
+.portrait .round-over-label
+{
+    font-size: 20px;
+}
+
 .continue-label
 {
     color: var(--color-font-white);
     font-size: 30px;
     align-self:center;
     -unity-font-definition: var(--font-default);
+}
+
+.portrait .continue-label
+{
+    font-size: 22px;
 }
 
 .close-button
@@ -82,6 +97,12 @@
     justify-content: space-between;
     margin-left: 80px;
     margin-right: 80px;
+}
+
+.portrait .horizontal-container
+{
+    margin-left: 2%;
+    margin-right: 2%;
 }
 
 .reward-container

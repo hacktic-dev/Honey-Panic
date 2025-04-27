@@ -70,7 +70,7 @@ bottom: 43%;
 
 .portrait .obtain-title
 {
-    font-size: 45px;
+    font-size: 24px;
 }
 
 .obtain-description
@@ -92,8 +92,8 @@ bottom: 43%;
 
 .portrait .obtain-description
 {
-    bottom: 29%;
-    font-size: 30px;
+    bottom: 30%;
+    font-size: 15px;
 }
 
 .title {
@@ -111,7 +111,7 @@ bottom: 43%;
 }
 
 .portrait .title {
-    font-size: 30px;
+    font-size: 20px;
 }
 
 .landscape .title {

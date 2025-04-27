@@ -17,6 +17,7 @@
 .honey-panic-ui {
     flex-direction: row;
     justify-content: center;
+    height: 100%;
 }
 
 .all-container
@@ -32,7 +33,7 @@
 {
     flex-direction: row;
     width: 100%;
-    align-items: flex-end;
+    align-items: flex-start;
     justify-content: space-between;
 }
 
@@ -57,8 +58,11 @@
 
 .portrait .title-container
 {
-    width: 50%;
-    left: 25%;
+    width: 63%;
+    left: 33%;
+    margin-left: 10px;
+    margin-right: 10px;
+    height: 8%;
 }
 
 .honey-panic-label
@@ -73,7 +77,7 @@
 
 .portrait .honey-panic-label
 {
-    font-size: 50px;
+    font-size: 30px;
 }
 
 .honey-panic-subtitle
@@ -103,8 +107,10 @@
 
 .portrait .countdown-container
 {
-    margin-top: 10px;
+    width: 30%;
     margin-right: 10px;
+    top: 9%;
+    height: 8%;
 }
 
 .honey-panic-countdown
@@ -116,6 +122,11 @@
     -unity-font-definition: var(--font-default);
 }
 
+.portrait .honey-panic-countdown
+{
+    font-size: 25px;
+}
+
 .countdown-icon
 {
     background-image: url("project://database/Assets/Icons/hourglass.png");
@@ -124,4 +135,10 @@
     margin-top: auto;
     margin-bottom: auto;
     margin-right: 20px;
+}
+
+.portrait .countdown-icon
+{
+    width: 32px;
+    height: 32px;
 }
