@@ -1,11 +1,95 @@
-.bee-collection-ui {
+:root {
+    --color-background-bottom: rgb(193, 209, 228);
+    --color-continue-button: rgb(28, 235, 79);
+    --color-continue-button-bottom: rgb(19, 201, 58);
+    --color-font: rgb(61, 171, 214);
+    --color-honey: rgb(255, 208, 0);
+    --color-honey-dark: rgb(201, 138, 0);
+    --color-font-white: rgb(244, 255, 255);
+    --color-dark-background: rgb(65, 175, 219);
+    --color-dark-background-bottom: rgb(29, 80, 100);
+    --color-greyed-button: rgb(176, 176, 176);
+    --color-greyed-button-bottom: rgb(122, 122, 122);
+    
+    --font-default: url("project://database/Assets/MuseoSansRounded1000 SDF.asset");
 }
 
-.bee-collection-label
+.bee-collection-ui {
+    height: 100%;
+}
+
+.collection-container
 {
-    font-size: 20px;
-    color: white;
+    background-image: url("project://database/Assets/Textures/background_gradient.png");
+    border-radius: 20px;
+    border-color: var(--color-background-bottom);
+    border-bottom-width: 4px;
+
+    flex-direction: column;
+    justify-content: space-between;
+    margin-right: 20px;
+}
+
+.landscape .collection-container
+{
+    height: 120px;
+    width: 30%;
     align-self: center;
-    text-shadow: 4px 4px 9.5px rgba(0,0,0,0.5);
-    font-size: 40px;
+}
+
+.portrait .collection-container
+{
+    width: 60%;
+    left: 36%;
+    height: 12%;
+}
+
+.bee-collection-title
+{
+    color: var(--color-font);
+    font-size: 60px;
+    align-self: center;
+    -unity-font-definition: var(--font-default);
+    -unity-text-align: middle-center;
+    width: 100%;
+}
+
+.portrait .bee-collection-title
+{
+    font-size: 30px;
+    margin-top: 10px;
+}
+
+.slider {
+  width: 80%;
+  align-self: center;
+  margin-top: 0px;
+}
+
+.slider .slider__background {
+    background-color: var(--color-honey-dark);
+    border-width: 0px;
+    border-radius: 8px;
+    border-color: #7cbf94; 
+}
+
+.slider .slider__foreground {
+    background-color: var(--color-honey);
+    border-width: 0px;
+    border-radius: 8px;
+    border-color: #7cbf94;
+}
+
+.slider-cooldown .slider__foreground {
+    background-color: #7cbf94; /* Slightly darker pastel green */
+    border-width: 0px;
+    border-radius: 8px;
+    border-color: #7cbf94;
+}
+
+.slider .slider__dot {
+        display: none;
+}
+.slider .slider__knob {
+    display: none;
 }

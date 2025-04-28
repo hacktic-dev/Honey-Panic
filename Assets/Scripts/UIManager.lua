@@ -104,6 +104,7 @@ function ShowBeeCollectionMode()
     ToggleUI("HoneyPanicUi", false)
     ToggleUI("RoundOverUi", false)
     ToggleUI("TokenDisplay", true)
+    BeeCollectionUiObject:GetComponent(BeeCollectionUi).Init()
 
     UpgradesDisplayUiObject:GetComponent(UpgradesDisplayUi).ShowMagnet()
 end
@@ -148,9 +149,9 @@ function HideRewardsWheel()
     ToggleUI("UpgradesDisplayUi", true)
     ToggleUI("TokenDisplay", true)
     
-    if GameplayManager.GetClientGameState() == GameplayManager.GameStateTypes.BeeCollection then
+    if GameplayManager.GetClientGameState() == 0 then
         ShowBeeCollectionMode()
-    elseif GameplayManager.GetClientGameState() == GameplayManager.GameStateTypes.HoneyPanic then
+    elseif GameplayManager.GetClientGameState() == 1 then
         ShowHoneyPanicMode()
     end
 end

@@ -7,8 +7,11 @@
     xsi:noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd"
 >
 
-  <hr:UILuaView class="bee-collection-ui">
-  <hr:UILabel class="bee-collection-label" name="_beeCollectionLabel"/>
+  <hr:UILuaView class="bee-collection-ui" picking-mode="Ignore">
+  <VisualElement class="collection-container" name="_collectionContainer">
+  <hr:UILabel class="bee-collection-title" name="_beeCollectionTitle"/>
+   <hr:UISlider name="_progressSlider" class="slider" picking-mode="Ignore"/>
+  </VisualElement>
   </hr:UILuaView>
 
 </UXML>
