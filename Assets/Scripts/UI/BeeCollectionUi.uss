@@ -41,7 +41,7 @@
 {
     width: 60%;
     left: 36%;
-    height: 12%;
+    height: 24%;
 }
 
 .bee-collection-title
