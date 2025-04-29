@@ -9,6 +9,8 @@ local Easing = TweenModule.Easing
 
 queue = {}
 
+NOTIFICATION_OFFSET = 160
+
 notificationShown = false
 currentNotification = nil
 
@@ -23,12 +25,13 @@ function ShowNotification(notificationId, playerName)
     notificationShown = true
 
     notificationLabel = UILabel.new()
+    notificationLabel:AddToClassList("notification-label")
     notificationLabel:SetPrelocalizedText(GetNotificationText(notificationId, playerName))
     _container:Add(notificationLabel)
     currentNotification = notificationLabel
 
     local ShowTween = Tween:new(
-        30, -- Start pos
+        NOTIFICATION_OFFSET, -- Start pos
         0, -- End pos
         0.5, -- Duration in seconds
         false, -- Loop flag
@@ -36,32 +39,32 @@ function ShowNotification(notificationId, playerName)
         Easing.easeOutBack, -- Easing function
         function(value, t)
             -- Update notification position
-            notificationLabel.style.translate = StyleTranslate.new(Translate.new(Length.new(0), Length.new(value)))
+            _container.style.translate = StyleTranslate.new(Translate.new(Length.new(0), Length.new(value)))
         end,
         function()
             -- Ensure final position is set
-            notificationLabel.style.translate = StyleTranslate.new(Translate.new(Length.new(0), Length.new(0)))
+            _container.style.translate = StyleTranslate.new(Translate.new(Length.new(0), Length.new(0)))
         end
     )
 
     ShowTween:start()
 
-    Timer.new(3, function()
+    Timer.new(5, function()
         if notificationShown then
             local HideTween = Tween:new(
                 0, -- Start pos
-                30, -- End pos
+                NOTIFICATION_OFFSET, -- End pos
                 0.5, -- Duration in seconds
                 false, -- Loop flag
                 false, -- Yoyo flag
                 Easing.easeOutBack, -- Easing function
                     function(value, t)
                     -- Update slot machine container scale
-                    currentNotification.style.translate = StyleTranslate.new(Translate.new(Length.new(0), Length.new(value)))
+                    _container.style.translate = StyleTranslate.new(Translate.new(Length.new(0), Length.new(value)))
             end,
             function()
                 -- Ensure final scale is set
-                currentNotification.style.translate = StyleTranslate.new(Translate.new(Length.new(0), Length.new(30)))
+                _container.style.translate = StyleTranslate.new(Translate.new(Length.new(0), Length.new(NOTIFICATION_OFFSET)))
                 currentNotification = nil
                 _container:Clear()
                 notificationShown = false
@@ -94,7 +97,9 @@ function GetNotificationText(notificationId, playerName)
 end
 
 function self:ClientAwake()
-    AddNotification("test", "Player1")
-    AddNotification("test", "Player2")
-    AddNotification("test", "Player3")
+    AddNotification("test", "Player 1")
+    AddNotification("test", "Player 2")
+    AddNotification("test", "Player 3")
+    AddNotification("test", "Player 4")
+    AddNotification("test", "Player 5")
 end

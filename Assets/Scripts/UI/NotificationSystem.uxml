@@ -7,7 +7,7 @@
     xsi:noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd"
 >
 
-  <hr:UILuaView class="notification-system">
+  <hr:UILuaView class="notification-system" picking-mode="Ignore">
   <VisualElement name="_container" class="notification-container">
   </VisualElement>
   </hr:UILuaView>

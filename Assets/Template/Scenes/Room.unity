@@ -897,7 +897,7 @@ MonoBehaviour:
   _networkId: 0
   _script: {fileID: -974389366465450183, guid: 3dcb57ad7d3c2c243888345947dce8e7, type: 3}
   _properties: []
-  _uiOutput: 0
+  _uiOutput: 3
   _uiOutputSettings:
     rid: -2
   references:
