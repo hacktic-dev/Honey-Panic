@@ -118,8 +118,10 @@ end
 function self:ClientAwake()
     goldPool = IntValue.new("gold_spent", 0)
 
-    NotifyMagnetActivatedEvent:Connect(function()
-        isClientMagnetActive = true
+    NotifyMagnetActivatedEvent:Connect(function(player)
+        if player == client.localPlayer then
+            isClientMagnetActive = true
+        end
     end)
 
     NotifyMagnetDeactivated:Connect(function()
