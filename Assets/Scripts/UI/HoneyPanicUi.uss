@@ -18,6 +18,8 @@
     flex-direction: row;
     justify-content: center;
     height: 100%;
+    position: absolute;
+    width: 100%;
 }
 
 .all-container
