@@ -15,8 +15,8 @@ local GameState = GameStateTypes.BeeCollection
 local clientGameState = nil
 local HoneyCollected : number = 0
 
-BEE_THRESHOLD = 300 -- Threshold for bee collection
-HONEY_PANIC_MAX_TIME = 30 -- Maximum time for honey panic in seconds
+BEE_THRESHOLD = 30 -- Threshold for bee collection
+HONEY_PANIC_MAX_TIME = 20 -- Maximum time for honey panic in seconds
 
 honeyPanicTime = nil
  
