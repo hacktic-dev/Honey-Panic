@@ -18,14 +18,14 @@ using Highrise.Lua;
 
 namespace Highrise.Lua.Generated
 {
-    [AddComponentMenu("Lua/RoundOverUi")]
-    [LuaRegisterType(0x28711703736bba07, typeof(LuaBehaviour))]
-    public class RoundOverUi : LuaBehaviourThunk
+    [AddComponentMenu("Lua/RewardParticle")]
+    [LuaRegisterType(0x47ac0d873a575b14, typeof(LuaBehaviour))]
+    public class RewardParticle : LuaBehaviourThunk
     {
-        private const string s_scriptGUID = "e28f158e667030c49bea4cc89378280d";
+        private const string s_scriptGUID = "95502de480bf19941b66689804d0f349";
         public override string ScriptGUID => s_scriptGUID;
 
-        [SerializeField] public UnityEngine.GameObject _rewardParticlesObj = default;
+        [SerializeField] public UnityEngine.Texture m_tokenSprite = default;
 
         protected override SerializedPropertyValue[] SerializeProperties()
         {
@@ -34,8 +34,9 @@ namespace Highrise.Lua.Generated
 
             return new SerializedPropertyValue[]
             {
-                CreateSerializedProperty(_script.GetPropertyAt(0), _rewardParticlesObj),
+                CreateSerializedProperty(_script.GetPropertyAt(0), m_tokenSprite),
                 CreateSerializedProperty(_script.GetPropertyAt(1), null),
+                CreateSerializedProperty(_script.GetPropertyAt(2), null),
             };
         }
     }

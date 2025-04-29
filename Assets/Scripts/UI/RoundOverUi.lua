@@ -1,5 +1,8 @@
 --!Type(UI)
 
+--!SerializeField
+local _rewardParticlesObj : GameObject = nil
+
 --!Bind
 local _roundOverContainer : VisualElement = nil
 
@@ -9,10 +12,13 @@ TweenModule = require("TweenModule")
 Tween = TweenModule.Tween
 Easing = TweenModule.Easing
 
+rewardParticlesScript = nil
+
 function Init(honeyCollected, tokensEarned)
     _roundOverContainer:Clear()
 
     local tokenContainer = VisualElement.new()
+    tokenContainer.name = "_roundOverTokenContainer"
     tokenContainer:AddToClassList("token-container")
 
     local tokenLabel = UILabel.new()
@@ -22,6 +28,7 @@ function Init(honeyCollected, tokensEarned)
     tokenContainer:Add(tokenLabel)
 
     local tokenIcon = VisualElement.new()
+    tokenIcon.name = "_roundOverTokenIcon"
     tokenIcon:AddToClassList("token-icon")
     tokenContainer:Add(tokenIcon)
 
@@ -105,6 +112,7 @@ function Init(honeyCollected, tokensEarned)
     rewardContainer:Add(rewardLabel)
 
     local rewardIcon = VisualElement.new()
+    rewardIcon.name = "_tokenRewardIcon"
     rewardIcon:AddToClassList("token-icon")
     rewardContainer:Add(rewardIcon)
 
@@ -171,4 +179,10 @@ function Init(honeyCollected, tokensEarned)
     )
 
     ScaleTween:start() -- Start the tween
+
+    Timer.new(0.9, function() rewardParticlesScript.PlayTokenAnimation(UI.hud:Q("_tokenRewardIcon"), tokensEarned) end, false)
+end
+
+function self:ClientAwake()
+    rewardParticlesScript = _rewardParticlesObj:GetComponent(RewardParticle)
 end
