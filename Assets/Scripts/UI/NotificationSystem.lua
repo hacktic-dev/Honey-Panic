@@ -105,6 +105,10 @@ function self:ClientAwake()
     _container.style.translate = StyleTranslate.new(Translate.new(Length.new(0), Length.new(NOTIFICATION_OFFSET)))
 
     UpgradesManager.NotifyMultiplierChangedEvent:Connect(function(newVal, player, won)
+        if player == nil then
+            return
+        end
+
         if won then
             if player ~= client.localPlayer then
                 AddNotification("multiplier_won", player.name)
