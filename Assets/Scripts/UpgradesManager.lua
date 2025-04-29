@@ -3,7 +3,7 @@
 GameplayManager = require("GameplayManager")
 PaymentsHandler = require("PaymentsHandler")
 
-NotifyMagnetActivated = Event.new("NotifyMagnetActivated")
+NotifyMagnetActivatedEvent = Event.new("NotifyMagnetActivatedEvent")
 NotifyMagnetDeactivated = Event.new("NotifyMagnetDeactivated")
 NotifyMagnetCountdownUpdated = Event.new("NotifyMagnetCountdownUpdated")
 
@@ -32,25 +32,25 @@ function TryPurchaseMultiplier()
     PaymentsHandler.PromptPurchase("multiplier", function() RequestMultiplierPurchaseEvent:FireServer() end)
 end
 
-function ActivateMagnet(player)
+function ActivateMagnet(player, won)
     magnetCounts[player] = 60
-    NotifyMagnetActivated:FireClient(player)
+    NotifyMagnetActivatedEvent:FireAllClients(player, won)
 end
 
-function IncrementMultiplier()
+function IncrementMultiplier(player, won)
     multiplier = multiplier + 0.1
-    NotifyMultiplierChangedEvent:FireAllClients(multiplier)
+    NotifyMultiplierChangedEvent:FireAllClients(multiplier, player, won)
 end
 
 function self:ServerAwake()
     goldPool = IntValue.new("gold_spent", 0)
 
-    RequestMagnetPurchaseEvent:Connect(function(player)
-        ActivateMagnet(player)
+    RequestMagnetPurchaseEvent:Connect(function(player, won)
+        ActivateMagnet(player, won)
     end)
 
-    RequestMultiplierPurchaseEvent:Connect(function(player)
-        IncrementMultiplier()
+    RequestMultiplierPurchaseEvent:Connect(function(player, won)
+        IncrementMultiplier(player, won)
     end)
 
     Timer.new(1, function()
@@ -98,25 +98,27 @@ function GetGoldPool()
 end
 
 function GiveReward(rewardId)
-    if rewardId == "magnet" then
-        RequestMagnetPurchaseEvent:FireServer()
-    elseif rewardId == "multiplier" then
-        RequestMultiplierPurchaseEvent:FireServer()
-    elseif rewardId == "gold_1" then
-        RequestGivePlayerGoldEvent:FireServer(1)
-    elseif rewardId == "gold_5" then
-        RequestGivePlayerGoldEvent:FireServer(5)
-    elseif rewardId == "gold_25" then
-        RequestGivePlayerGoldEvent:FireServer(25)
-    else
-        print("ERROR - Invalid reward ID: " .. rewardId)
-    end
+    Timer.new(1.5, function()
+        if rewardId == "magnet" then
+            RequestMagnetPurchaseEvent:FireServer(true)
+        elseif rewardId == "multiplier" then
+            RequestMultiplierPurchaseEvent:FireServer(true)
+        elseif rewardId == "gold_1" then
+            RequestGivePlayerGoldEvent:FireServer(1)
+        elseif rewardId == "gold_5" then
+            RequestGivePlayerGoldEvent:FireServer(5)
+        elseif rewardId == "gold_25" then
+            RequestGivePlayerGoldEvent:FireServer(25)
+        else
+            print("ERROR - Invalid reward ID: " .. rewardId)
+        end
+    end, false)
 end
 
 function self:ClientAwake()
     goldPool = IntValue.new("gold_spent", 0)
 
-    NotifyMagnetActivated:Connect(function()
+    NotifyMagnetActivatedEvent:Connect(function()
         isClientMagnetActive = true
     end)
 

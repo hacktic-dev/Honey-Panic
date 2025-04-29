@@ -63,7 +63,12 @@ function self:ClientAwake()
         UpgradesManager.TryPurchaseMultiplier()
     end)
 
-    UpgradesManager.NotifyMagnetActivated:Connect(function()
+    UpgradesManager.NotifyMagnetActivatedEvent:Connect(function(player)
+
+        if player ~= client.localPlayer then
+            return
+        end
+
         _magnetButton:AddToClassList("hidden")
         _magnetDisabledIcon:AddToClassList("hidden")
         _magnetActiveIcon:RemoveFromClassList("hidden")
@@ -87,7 +92,7 @@ function self:ClientAwake()
         _magnetCountdown:AddToClassList("hidden")
     end)
 
-    UpgradesManager.NotifyMultiplierChangedEvent:Connect(function(newVal)
+    UpgradesManager.NotifyMultiplierChangedEvent:Connect(function(newVal, player)
         local roundedVal = math.floor(newVal * 10 + 0.5) / 10
         _multiplierLabel:SetPrelocalizedText("x" .. tostring(roundedVal))
 
