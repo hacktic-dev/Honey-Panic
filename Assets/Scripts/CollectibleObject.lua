@@ -1,8 +1,9 @@
 --!Type(Client)
 
-COLLECTION_DISTANCE = 1
-MAGNET_DISTANCE = 5
-MAGNET_STRENGTH = 1
+--!SerializeField
+local COLLECTION_DISTANCE : number = 2
+MAGNET_DISTANCE = 6.5
+MAGNET_STRENGTH = 2
 
 ClientObjectSpawner = require("ClientObjectSpawner")
 UpgradesManager = require("UpgradesManager")

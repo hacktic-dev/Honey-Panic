@@ -18,15 +18,14 @@ using Highrise.Lua;
 
 namespace Highrise.Lua.Generated
 {
-    [AddComponentMenu("Lua/CollectibleObject")]
-    [LuaRegisterType(0x8a92e01e81b17f66, typeof(LuaBehaviour))]
-    public class CollectibleObject : LuaBehaviourThunk
+    [AddComponentMenu("Lua/BeeWandererScript")]
+    [LuaRegisterType(0x92029be1bafd4e92, typeof(LuaBehaviour))]
+    public class BeeWandererScript : LuaBehaviourThunk
     {
-        private const string s_scriptGUID = "d61eee943193f614d8af489e32a869f9";
+        private const string s_scriptGUID = "b342d3073231f51459af7c42c3fc7d1e";
         public override string ScriptGUID => s_scriptGUID;
 
-        [SerializeField] public System.Double m_COLLECTION_DISTANCE = 2;
-        [SerializeField] public System.String m_objectType = "";
+        [SerializeField] public UnityEngine.GameObject m_mainCam = default;
 
         protected override SerializedPropertyValue[] SerializeProperties()
         {
@@ -35,8 +34,7 @@ namespace Highrise.Lua.Generated
 
             return new SerializedPropertyValue[]
             {
-                CreateSerializedProperty(_script.GetPropertyAt(0), m_COLLECTION_DISTANCE),
-                CreateSerializedProperty(_script.GetPropertyAt(1), m_objectType),
+                CreateSerializedProperty(_script.GetPropertyAt(0), m_mainCam),
             };
         }
     }

@@ -18,15 +18,14 @@ using Highrise.Lua;
 
 namespace Highrise.Lua.Generated
 {
-    [AddComponentMenu("Lua/CollectibleObject")]
-    [LuaRegisterType(0x8a92e01e81b17f66, typeof(LuaBehaviour))]
-    public class CollectibleObject : LuaBehaviourThunk
+    [AddComponentMenu("Lua/WingRotator")]
+    [LuaRegisterType(0x745f8dea7e5a913b, typeof(LuaBehaviour))]
+    public class WingRotator : LuaBehaviourThunk
     {
-        private const string s_scriptGUID = "d61eee943193f614d8af489e32a869f9";
+        private const string s_scriptGUID = "ffd718b6fc7042d4fafdc4a0b392fce9";
         public override string ScriptGUID => s_scriptGUID;
 
-        [SerializeField] public System.Double m_COLLECTION_DISTANCE = 2;
-        [SerializeField] public System.String m_objectType = "";
+        [SerializeField] public System.Double m_direction = 1;
 
         protected override SerializedPropertyValue[] SerializeProperties()
         {
@@ -35,8 +34,7 @@ namespace Highrise.Lua.Generated
 
             return new SerializedPropertyValue[]
             {
-                CreateSerializedProperty(_script.GetPropertyAt(0), m_COLLECTION_DISTANCE),
-                CreateSerializedProperty(_script.GetPropertyAt(1), m_objectType),
+                CreateSerializedProperty(_script.GetPropertyAt(0), m_direction),
             };
         }
     }
